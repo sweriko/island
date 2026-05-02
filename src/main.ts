@@ -9,19 +9,22 @@ import { cameraProjectionMatrix, cameraViewMatrix, Fn, positionWorld, round, scr
 import { Pane } from "tweakpane";
 
 import dudeUrl from "../assets/dude.glb?url";
+import { painterlyPass } from "./painterlyPass";
 
 const BACKGROUND_COLOR = 0xffffff;
+const PAINTERLY_BACKGROUND_COLOR = 0xf2ead6;
 const MAX_PIXEL_RATIO = 2;
 
 type VertexJitterMaterial = THREE.Material & {
   vertexNode?: unknown;
 };
 
-type RenderStyle = "basic" | "psx";
+type RenderStyle = "basic" | "psx" | "painterly";
 
 const STYLE_OPTIONS: Record<string, RenderStyle> = {
   Basic: "basic",
   PSX: "psx",
+  Painterly: "painterly",
 };
 
 class BoilerplateApp {
@@ -39,6 +42,10 @@ class BoilerplateApp {
   private readonly depthEdgeStrength = uniform(0.4);
   private readonly vertexJitterStrength = uniform(0.5);
   private readonly vertexSnapPixelSize = uniform(4);
+  private readonly painterlyBrushSize = uniform(2);
+  private readonly painterlyEdgeStrength = uniform(1.2);
+  private readonly painterlyPaperStrength = uniform(0.45);
+  private readonly painterlySaturation = uniform(1.25);
   private readonly psxVertexJitterNode = Fn(() => {
     const clipPosition = cameraProjectionMatrix.mul(cameraViewMatrix).mul(positionWorld);
     const snapGrid = screenSize.xy.div(this.vertexSnapPixelSize);
@@ -48,6 +55,7 @@ class BoilerplateApp {
     return vec4(this.vertexJitterStrength.mix(clipPosition.xy, snappedPosition), clipPosition.zw);
   })();
   private readonly renderPipeline: THREE.RenderPipeline;
+  private readonly painterlyPipeline: THREE.RenderPipeline;
   private readonly controls: OrbitControls;
   private readonly timer = new THREE.Timer();
   private readonly paneHost: HTMLDivElement;
@@ -81,15 +89,31 @@ class BoilerplateApp {
     style: "basic" as RenderStyle,
     vertexJitter: 0.5,
     vertexSnapPixelSize: 4,
+    painterlyBrush: 2,
+    painterlyEdge: 1.2,
+    painterlyPaper: 0.45,
+    painterlySaturation: 1.25,
   };
 
   private psxFolder!: ReturnType<Pane["addFolder"]>;
+  private painterlyFolder!: ReturnType<Pane["addFolder"]>;
 
   constructor(container: HTMLElement) {
     this.container = container;
     this.renderPipeline = new THREE.RenderPipeline(
       this.renderer,
       pixelationPass(this.scene, this.camera, this.pixelSize, this.normalEdgeStrength, this.depthEdgeStrength),
+    );
+    this.painterlyPipeline = new THREE.RenderPipeline(
+      this.renderer,
+      painterlyPass(
+        this.scene,
+        this.camera,
+        this.painterlyBrushSize,
+        this.painterlyEdgeStrength,
+        this.painterlyPaperStrength,
+        this.painterlySaturation,
+      ) as unknown as THREE.Node,
     );
 
     this.paneHost = document.createElement("div");
@@ -200,6 +224,7 @@ class BoilerplateApp {
       material.dispose();
     }
 
+    this.painterlyPipeline.dispose();
     this.renderer.dispose();
     this.container.replaceChildren();
   }
@@ -285,6 +310,40 @@ class BoilerplateApp {
       step: 1,
     }).on("change", ({ value }) => {
       this.vertexSnapPixelSize.value = value;
+    });
+
+    this.painterlyFolder = this.pane.addFolder({ title: "Painterly" });
+    this.painterlyFolder.addBinding(this.params, "painterlyBrush", {
+      label: "Brush size",
+      min: 1,
+      max: 6,
+      step: 1,
+    }).on("change", ({ value }) => {
+      this.painterlyBrushSize.value = value;
+    });
+    this.painterlyFolder.addBinding(this.params, "painterlyEdge", {
+      label: "Ink edges",
+      min: 0,
+      max: 3,
+      step: 0.05,
+    }).on("change", ({ value }) => {
+      this.painterlyEdgeStrength.value = value;
+    });
+    this.painterlyFolder.addBinding(this.params, "painterlyPaper", {
+      label: "Paper grain",
+      min: 0,
+      max: 1,
+      step: 0.02,
+    }).on("change", ({ value }) => {
+      this.painterlyPaperStrength.value = value;
+    });
+    this.painterlyFolder.addBinding(this.params, "painterlySaturation", {
+      label: "Saturation",
+      min: 0.5,
+      max: 2,
+      step: 0.05,
+    }).on("change", ({ value }) => {
+      this.painterlySaturation.value = value;
     });
 
     this.pane.addBinding(this.params, "exposure", {
@@ -423,6 +482,7 @@ class BoilerplateApp {
   private applyStyle(style: RenderStyle): void {
     this.params.style = style;
     const useJitter = style === "psx";
+    const usePainterly = style === "painterly";
 
     for (const material of this.psxJitterMaterials) {
       (material as VertexJitterMaterial).vertexNode = useJitter ? this.psxVertexJitterNode : null;
@@ -430,11 +490,22 @@ class BoilerplateApp {
     }
 
     this.psxFolder.hidden = !useJitter;
+    this.painterlyFolder.hidden = !usePainterly;
+
+    // Painterly mode dresses the scene like a canvas: warm off-white background,
+    // softer floor, no helper grid.
+    const bgColor = usePainterly ? PAINTERLY_BACKGROUND_COLOR : BACKGROUND_COLOR;
+    (this.scene.background as THREE.Color).setHex(bgColor);
+    this.ground.material.color.setHex(usePainterly ? 0xe6dcc1 : 0xeeeeee);
+    this.ground.material.needsUpdate = true;
+    this.grid.visible = !usePainterly;
   }
 
   private renderFrame(): void {
     if (this.params.style === "psx") {
       this.renderPipeline.render();
+    } else if (this.params.style === "painterly") {
+      this.painterlyPipeline.render();
     } else {
       this.renderer.render(this.scene, this.camera);
     }
