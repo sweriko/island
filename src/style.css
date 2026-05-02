@@ -1,0 +1,113 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+  font-synthesis: none;
+  line-height: 1.4;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#app {
+  position: relative;
+}
+
+body {
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.app__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  touch-action: none;
+}
+
+.ui-pane {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  max-height: calc(100% - 32px);
+  overflow: auto;
+  pointer-events: auto;
+}
+
+.ui-pane .tp-dfwv {
+  width: min(320px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+}
+
+.ui-stats {
+  position: absolute !important;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1;
+  opacity: 0.96;
+}
+
+.error-card {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  max-width: 420px;
+  padding: 16px 18px;
+  color: #edf4ff;
+  border: 1px solid rgba(160, 194, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(11, 17, 27, 0.92);
+}
+
+.error-card__title {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.error-card__meta {
+  margin: 8px 0 0;
+  color: rgba(237, 244, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .ui-pane {
+    top: 12px;
+    right: 12px;
+    max-height: calc(100% - 24px);
+  }
+
+  .ui-pane .tp-dfwv {
+    width: min(300px, calc(100vw - 24px));
+    max-height: calc(100vh - 24px);
+  }
+
+  .ui-stats {
+    left: 12px;
+    bottom: 12px;
+    transform: scale(0.92);
+    transform-origin: left bottom;
+  }
+
+  .error-card {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}
