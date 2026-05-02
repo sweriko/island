@@ -1,0 +1,102 @@
+{
+  "path": "/Game/Painterly/Materials/Material-Functions/MF_SwitchByInstanceData",
+  "class": "MaterialFunction",
+  "interface": {
+    "_class": "MaterialFunction",
+    "description": ""
+  },
+  "callers": [
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_4",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_0",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_6",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_2",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_5",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_1",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_7",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_3",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_8",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_4",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_9",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_5",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_25",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "PerInstanceCustomData",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_6",
+          "output_name": ""
+        }
+      ]
+    }
+  ],
+  "num_expressions": 13
+}

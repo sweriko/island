@@ -1,0 +1,142 @@
+Begin Object Class=/Script/Engine.MaterialFunction Name="MF_CurvatureFilter" ExportPath="/Script/Engine.MaterialFunction'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter'"
+   Begin Object Class=/Script/Engine.MaterialFunctionEditorOnlyData Name="MF_CurvatureFilterEditorOnlyData" ExportPath="/Script/Engine.MaterialFunctionEditorOnlyData'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MF_CurvatureFilterEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionAbs Name="MaterialExpressionAbs_0" ExportPath="/Script/Engine.MaterialExpressionAbs'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionAbs_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionAbs Name="MaterialExpressionAbs_1" ExportPath="/Script/Engine.MaterialExpressionAbs'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionAbs_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionAdd Name="MaterialExpressionAdd_0" ExportPath="/Script/Engine.MaterialExpressionAdd'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionAdd_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionCeil Name="MaterialExpressionCeil_0" ExportPath="/Script/Engine.MaterialExpressionCeil'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionCeil_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComment Name="MaterialExpressionComment_0" ExportPath="/Script/Engine.MaterialExpressionComment'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionComment_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionDDX Name="MaterialExpressionDDX_0" ExportPath="/Script/Engine.MaterialExpressionDDX'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionDDX_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionDDY Name="MaterialExpressionDDY_0" ExportPath="/Script/Engine.MaterialExpressionDDY'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionDDY_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFunctionInput Name="MaterialExpressionFunctionInput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionFunctionInput_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFunctionOutput Name="MaterialExpressionFunctionOutput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionOutput'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionFunctionOutput_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMaterialFunctionCall Name="MaterialExpressionMaterialFunctionCall_0" ExportPath="/Script/Engine.MaterialExpressionMaterialFunctionCall'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionMaterialFunctionCall_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionSubtract Name="MaterialExpressionSubtract_0" ExportPath="/Script/Engine.MaterialExpressionSubtract'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionSubtract_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionVertexNormalWS Name="MaterialExpressionVertexNormalWS_0" ExportPath="/Script/Engine.MaterialExpressionVertexNormalWS'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionVertexNormalWS_0'"
+   End Object
+   Begin Object Name="MF_CurvatureFilterEditorOnlyData" ExportPath="/Script/Engine.MaterialFunctionEditorOnlyData'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MF_CurvatureFilterEditorOnlyData'"
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionFunctionOutput'MF_CurvatureFilter:MaterialExpressionFunctionOutput_0'","/Script/Engine.MaterialExpressionVertexNormalWS'MF_CurvatureFilter:MaterialExpressionVertexNormalWS_0'","/Script/Engine.MaterialExpressionFunctionInput'MF_CurvatureFilter:MaterialExpressionFunctionInput_0'","/Script/Engine.MaterialExpressionDDY'MF_CurvatureFilter:MaterialExpressionDDY_0'","/Script/Engine.MaterialExpressionDDX'MF_CurvatureFilter:MaterialExpressionDDX_0'","/Script/Engine.MaterialExpressionAbs'MF_CurvatureFilter:MaterialExpressionAbs_0'","/Script/Engine.MaterialExpressionAbs'MF_CurvatureFilter:MaterialExpressionAbs_1'","/Script/Engine.MaterialExpressionAdd'MF_CurvatureFilter:MaterialExpressionAdd_0'","/Script/Engine.MaterialExpressionMaterialFunctionCall'MF_CurvatureFilter:MaterialExpressionMaterialFunctionCall_0'","/Script/Engine.MaterialExpressionSubtract'MF_CurvatureFilter:MaterialExpressionSubtract_0'","/Script/Engine.MaterialExpressionCeil'MF_CurvatureFilter:MaterialExpressionCeil_0'"),EditorComments=("/Script/Engine.MaterialExpressionComment'MF_CurvatureFilter:MaterialExpressionComment_0'"))
+   End Object
+   Begin Object Name="MaterialExpressionAbs_0" ExportPath="/Script/Engine.MaterialExpressionAbs'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionAbs_0'"
+      Input=(Expression="/Script/Engine.MaterialExpressionDDY'MF_CurvatureFilter:MaterialExpressionDDY_0'")
+      MaterialExpressionEditorX=-816
+      MaterialExpressionEditorY=368
+      MaterialExpressionGuid=B5E649C742B9FE0B98992F8853A8C007
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionAbs_1" ExportPath="/Script/Engine.MaterialExpressionAbs'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionAbs_1'"
+      Input=(Expression="/Script/Engine.MaterialExpressionDDX'MF_CurvatureFilter:MaterialExpressionDDX_0'")
+      MaterialExpressionEditorX=-816
+      MaterialExpressionEditorY=608
+      MaterialExpressionGuid=7FA4989D479E6919BF32E9884DCBE149
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionAdd_0" ExportPath="/Script/Engine.MaterialExpressionAdd'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionAdd_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionAbs'MF_CurvatureFilter:MaterialExpressionAbs_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionAbs'MF_CurvatureFilter:MaterialExpressionAbs_1'")
+      MaterialExpressionEditorX=-672
+      MaterialExpressionEditorY=432
+      MaterialExpressionGuid=D44A9963413EA917BABE1484A4F27780
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionCeil_0" ExportPath="/Script/Engine.MaterialExpressionCeil'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionCeil_0'"
+      Input=(Expression="/Script/Engine.MaterialExpressionSubtract'MF_CurvatureFilter:MaterialExpressionSubtract_0'")
+      MaterialExpressionEditorX=-96
+      MaterialExpressionEditorY=416
+      MaterialExpressionGuid=15FBF4D54C604AC15873ACBD515BF37E
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionComment_0" ExportPath="/Script/Engine.MaterialExpressionComment'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionComment_0'"
+      SizeX=704
+      SizeY=176
+      Text="This MF separated the curved from the flat surfaces.\r\nIt checks whether  the normal vector changes from one pixel to the next.\r\nCurved Surface = 1 (White)\r\nFlat Surface = 0 (Black)"
+      MaterialExpressionEditorX=-1104
+      MaterialExpressionEditorY=112
+      MaterialExpressionGuid=3E2C66D6426FCF0D976D2399CBCA2E47
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+      Desc="This MF separated the curved from the flat surfaces.\r\nIt checks whether  the normal vector changes from one pixel to the next.\r\nCurved Surface = 1 (White)\r\nFlat Surface = 0 (Black)"
+   End Object
+   Begin Object Name="MaterialExpressionDDX_0" ExportPath="/Script/Engine.MaterialExpressionDDX'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionDDX_0'"
+      Value=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_CurvatureFilter:MaterialExpressionFunctionInput_0'")
+      MaterialExpressionEditorX=-976
+      MaterialExpressionEditorY=576
+      MaterialExpressionGuid=E85BB7E24BFE3CF0533CCFB4682B9D70
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+      Desc="How different is the input value for this pixel compared to the pixel immediately below it?"
+      bCommentBubbleVisible=True
+   End Object
+   Begin Object Name="MaterialExpressionDDY_0" ExportPath="/Script/Engine.MaterialExpressionDDY'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionDDY_0'"
+      Value=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_CurvatureFilter:MaterialExpressionFunctionInput_0'")
+      MaterialExpressionEditorX=-976
+      MaterialExpressionEditorY=368
+      MaterialExpressionGuid=AEF6681640A515D5669E97A2F4C33D29
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+      Desc="How different is the input value for this pixel compared to the pixel immediately to its right?"
+      bCommentBubbleVisible=True
+   End Object
+   Begin Object Name="MaterialExpressionFunctionInput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionFunctionInput_0'"
+      Preview=(Expression="/Script/Engine.MaterialExpressionVertexNormalWS'MF_CurvatureFilter:MaterialExpressionVertexNormalWS_0'")
+      InputName="Input Normal"
+      Id=A37B71F24BEDC6AFD175E99004327429
+      MaterialExpressionEditorX=-1344
+      MaterialExpressionEditorY=448
+      MaterialExpressionGuid=2476D78E447C234C11970B86FB41A793
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionFunctionOutput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionOutput'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionFunctionOutput_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionCeil'MF_CurvatureFilter:MaterialExpressionCeil_0'")
+      bLastPreviewed=True
+      Id=5C687E10487CC01BCF6A2EB4911AB7CA
+      MaterialExpressionEditorX=80
+      MaterialExpressionEditorY=384
+      MaterialExpressionGuid=14D1BB5243F201F8773C96A14CE5A2DE
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionMaterialFunctionCall_0" ExportPath="/Script/Engine.MaterialExpressionMaterialFunctionCall'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionMaterialFunctionCall_0'"
+      MaterialFunction="/Script/Engine.MaterialFunction'/Engine/Functions/Engine_MaterialFunctions02/Math/AddComponents.AddComponents'"
+      FunctionInputs(0)=(ExpressionInputId=4ACF0EC24FAED9DDF84C5094F6AAEC81,Input=(Expression="/Script/Engine.MaterialExpressionAdd'MF_CurvatureFilter:MaterialExpressionAdd_0'",InputName="f2"))
+      FunctionInputs(1)=(ExpressionInputId=CC81965F4EE6B14C195011A433CF5F55,Input=(OutputIndex=-1,InputName="f3"))
+      FunctionInputs(2)=(ExpressionInputId=DA1973284F32A169D5B16CA65F198E8B,Input=(OutputIndex=-1,InputName="f4"))
+      FunctionOutputs(0)=(ExpressionOutputId=ECB55AEB499AD40BE863418CBC0CDC8C,Output=(OutputName="f2"))
+      FunctionOutputs(1)=(ExpressionOutputId=767C2D6D43226813DFF62F8C25B0B5BE,Output=(OutputName="f3"))
+      FunctionOutputs(2)=(ExpressionOutputId=1DBE9C334BA54F2FEF7E55BC0B9A8C44,Output=(OutputName="f4"))
+      MaterialExpressionEditorX=-528
+      MaterialExpressionEditorY=416
+      MaterialExpressionGuid=8E47EB8A4624088EF7BBDE8A643B6937
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+      Outputs(0)=(OutputName="f2")
+      Outputs(1)=(OutputName="f3")
+      Outputs(2)=(OutputName="f4")
+   End Object
+   Begin Object Name="MaterialExpressionSubtract_0" ExportPath="/Script/Engine.MaterialExpressionSubtract'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionSubtract_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionMaterialFunctionCall'MF_CurvatureFilter:MaterialExpressionMaterialFunctionCall_0'")
+      ConstB=0.000002
+      MaterialExpressionEditorX=-320
+      MaterialExpressionEditorY=416
+      MaterialExpressionGuid=0574B53B4DB7B869E5F4A4A31C89ADB4
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   Begin Object Name="MaterialExpressionVertexNormalWS_0" ExportPath="/Script/Engine.MaterialExpressionVertexNormalWS'/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter.MF_CurvatureFilter:MaterialExpressionVertexNormalWS_0'"
+      MaterialExpressionEditorX=-1552
+      MaterialExpressionEditorY=432
+      MaterialExpressionGuid=14A0996548946B898504C0BE2EB14230
+      Function="/Script/Engine.MaterialFunction'MF_CurvatureFilter'"
+   End Object
+   bExposeToLibrary=True
+   DependentFunctionExpressionCandidates(0)="/Script/Engine.MaterialExpressionMaterialFunctionCall'MaterialExpressionMaterialFunctionCall_0'"
+   EditorOnlyData="/Script/Engine.MaterialFunctionEditorOnlyData'MF_CurvatureFilterEditorOnlyData'"
+   StateId=2AD670E44BD5E6C9ACCB7F86A466B673
+   CombinedInputTypes=4
+   CombinedOutputTypes=15
+End Object

@@ -1,0 +1,115 @@
+{
+  "path": "/Game/Painterly/Materials/Material-Functions/MF_CurvatureFilter",
+  "class": "MaterialFunction",
+  "interface": {
+    "_class": "MaterialFunction",
+    "description": ""
+  },
+  "callers": [
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_14",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_9",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_2",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_1",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_3",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_3",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_13",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_0",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_15",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_10",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_16",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_11",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_17",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_12",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_27",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Input Normal",
+          "type": 15,
+          "expression": "MaterialExpressionVertexNormalWS_14",
+          "output_name": ""
+        }
+      ]
+    }
+  ],
+  "num_expressions": 11
+}

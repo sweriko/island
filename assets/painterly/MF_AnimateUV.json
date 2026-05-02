@@ -1,0 +1,65 @@
+{
+  "path": "/Game/Painterly/Materials/Material-Functions/MF_AnimateUV",
+  "class": "MaterialFunction",
+  "interface": {
+    "_class": "MaterialFunction",
+    "description": ""
+  },
+  "callers": [
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_11",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Step Time",
+          "type": 4,
+          "expression": "MaterialExpressionVectorParameter_4",
+          "output_name": ""
+        },
+        {
+          "index": 1,
+          "name": "Step Size",
+          "type": 4,
+          "expression": "MaterialExpressionVectorParameter_5",
+          "output_name": ""
+        },
+        {
+          "index": 2,
+          "name": "Tiling",
+          "type": 15,
+          "expression": "MaterialExpressionPerInstanceCustomData_15",
+          "output_name": ""
+        }
+      ]
+    },
+    {
+      "material": "/Game/Painterly/Materials/M_PainterlyShader",
+      "expression": "MaterialExpressionMaterialFunctionCall_21",
+      "inputs": [
+        {
+          "index": 0,
+          "name": "Step Time",
+          "type": 4,
+          "expression": "MaterialExpressionVectorParameter_17",
+          "output_name": ""
+        },
+        {
+          "index": 1,
+          "name": "Step Size",
+          "type": 4,
+          "expression": "MaterialExpressionVectorParameter_18",
+          "output_name": ""
+        },
+        {
+          "index": 2,
+          "name": "Tiling",
+          "type": 15,
+          "expression": "MaterialExpressionConstant_24",
+          "output_name": ""
+        }
+      ]
+    }
+  ],
+  "num_expressions": 26
+}

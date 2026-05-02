@@ -1,0 +1,230 @@
+{
+  "MI_PainterlyShaderBlue": {
+    "parent": "/Game/Painterly/Materials/M_PainterlyShader.M_PainterlyShader",
+    "scalar": {
+      "ColorCPosition": 0.4300000071525574,
+      "ColorDPosition": 0.7109760046005249,
+      "ColorRampThreshold": 1.0422049760818481,
+      "NoiseStrength": 4.596189022064209,
+      "InnerErosionTiling": 2.0,
+      "InnerErosionStrength": 3.1175899505615234,
+      "OuterErosionStrength": -0.5139399766921997,
+      "PlanarInnerErosionStrength": 1.5244330167770386,
+      "OutlinesGeneralOffset": 4.114448070526123,
+      "OutlineWidth": 0.07919999957084656,
+      "SingleOutlineDifference": 0.5346260070800781,
+      "ShadowStrength": 0.16107000410556793,
+      "RefractionDepthBias": 0.0
+    },
+    "vector": {
+      "Step Time": {
+        "r": 0.699999988079071,
+        "g": 0.699999988079071,
+        "b": 0.0,
+        "a": 1.0
+      },
+      "ColorA": {
+        "r": 0.6239609718322754,
+        "g": 0.8962699770927429,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "ColorB": {
+        "r": 0.16521699726581573,
+        "g": 0.7227159738540649,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "ColorC": {
+        "r": 0.03688900172710419,
+        "g": 0.22322799265384674,
+        "b": 0.2874409854412079,
+        "a": 1.0
+      },
+      "ColorD": {
+        "r": 0.0,
+        "g": 0.03189599886536598,
+        "b": 0.07035999745130539,
+        "a": 1.0
+      },
+      "OutlineDirectionalOffset": {
+        "r": -12.560537338256836,
+        "g": 1.1435869932174683,
+        "b": -7.597148895263672,
+        "a": 1.0
+      },
+      "OutlineRotation": {
+        "r": 0.03680000081658363,
+        "g": 0.02879999950528145,
+        "b": 0.02800000086426735,
+        "a": 1.0
+      }
+    }
+  },
+  "MI_PainterlyShaderBlue-Cube": {
+    "parent": "/Game/Painterly/Materials/M_PainterlyShader.M_PainterlyShader",
+    "scalar": {
+      "NoiseStrength": 3.352647066116333,
+      "InnerErosionStrength": 4.108583927154541,
+      "OuterErosionStrength": -2.292520046234131,
+      "PlanarOuterErosionStrength": 11.846057891845703,
+      "PlanarEdgeErosionOutlineMaskStrength": -0.06400000303983688,
+      "OutlinesGeneralOffset": 10.731178283691406,
+      "OutlineWidth": 0.31119999289512634,
+      "SingleOutlineDifference": 0.7246649861335754,
+      "ShadowStrength": 0.3283349871635437,
+      "SpecularEdgeSmooth": 0.05119999870657921,
+      "SpecularOpacity": 0.35839998722076416,
+      "SpecularStrength": 0.8827469944953918,
+      "RefractionDepthBias": 0.0
+    },
+    "vector": {
+      "Step Time": {
+        "r": 0.699999988079071,
+        "g": 0.699999988079071,
+        "b": 0.0,
+        "a": 1.0
+      },
+      "OutlineDirectionalOffset": {
+        "r": 4.860343933105469,
+        "g": -15.447672843933105,
+        "b": 0.3973880112171173,
+        "a": 1.0
+      },
+      "OutlineRotation": {
+        "r": 0.044199999421834946,
+        "g": -0.004980999976396561,
+        "b": 0.08375299721956253,
+        "a": 1.0
+      }
+    }
+  },
+  "MI_PainterlyShaderRed": {
+    "parent": "/Game/Painterly/Materials/M_PainterlyShader.M_PainterlyShader",
+    "scalar": {
+      "ColorCPosition": 0.1979999989271164,
+      "ColorDPosition": 0.4949760138988495,
+      "ColorRampThreshold": 0.670553982257843,
+      "NoiseStrength": 2.549920082092285,
+      "InnerErosionStrength": 2.6566948890686035,
+      "OuterErosionStrength": 3.402156114578247,
+      "OutlinesGeneralOffset": 4.883365154266357,
+      "OutlineWidth": 0.10719999670982361,
+      "SingleOutlineDifference": 7.548874855041504,
+      "ShadowStrength": 0.32207098603248596,
+      "SpecularEdgeSmooth": 0.04479999840259552,
+      "SpecularStrength": 0.8819469809532166,
+      "RefractionDepthBias": 0.0
+    },
+    "vector": {
+      "ColorA": {
+        "r": 0.9114580154418945,
+        "g": 0.7690430283546448,
+        "b": 0.8082630038261414,
+        "a": 1.0
+      },
+      "ColorB": {
+        "r": 0.7291669845581055,
+        "g": 0.4291450083255768,
+        "b": 0.5117689967155457,
+        "a": 1.0
+      },
+      "ColorC": {
+        "r": 0.5394799709320068,
+        "g": 0.16826899349689484,
+        "b": 0.27049800753593445,
+        "a": 1.0
+      },
+      "ColorD": {
+        "r": 0.171875,
+        "g": 0.023274999111890793,
+        "b": 0.06419800221920013,
+        "a": 1.0
+      },
+      "OutlineDirectionalOffset": {
+        "r": 5.960464477539063e-08,
+        "g": -1.532575011253357,
+        "b": -0.9529430270195007,
+        "a": 1.0
+      },
+      "OutlineRotation": {
+        "r": -0.006399999838322401,
+        "g": -0.0,
+        "b": -0.010400000028312206,
+        "a": 1.0
+      },
+      "OutlinesColor": {
+        "r": 0.7396010160446167,
+        "g": 0.613739013671875,
+        "b": 0.7760419845581055,
+        "a": 1.0
+      }
+    }
+  },
+  "MI_PainterlyShaderYellow": {
+    "parent": "/Game/Painterly/Materials/M_PainterlyShader.M_PainterlyShader",
+    "scalar": {
+      "OutlinesGeneralOffset": 5.063769817352295,
+      "OutlineWidth": 0.1120000034570694,
+      "SpecularEdgeSmooth": 0.014399999752640724,
+      "SpecularStrength": 0.9227460026741028,
+      "RefractionDepthBias": 0.0
+    },
+    "vector": {
+      "ColorA": {
+        "r": 0.90625,
+        "g": 0.8938069939613342,
+        "b": 0.7976890206336975,
+        "a": 1.0
+      },
+      "ColorB": {
+        "r": 0.8072919845581055,
+        "g": 0.7687379717826843,
+        "b": 0.47091999650001526,
+        "a": 1.0
+      },
+      "ColorC": {
+        "r": 0.7083330154418945,
+        "g": 0.6364489793777466,
+        "b": 0.08116299659013748,
+        "a": 1.0
+      },
+      "ColorD": {
+        "r": 0.21354199945926666,
+        "g": 0.19187100231647491,
+        "b": 0.02446799911558628,
+        "a": 1.0
+      },
+      "OutlinesColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+      }
+    }
+  },
+  "MI_Gray": {
+    "parent": "/Game/Painterly/Materials/M_BasicColor.M_BasicColor",
+    "scalar": {
+      "RefractionDepthBias": 0.0
+    },
+    "vector": {
+      "BaseColor": {
+        "r": 0.24705900251865387,
+        "g": 0.24705900251865387,
+        "b": 0.24705900251865387,
+        "a": 1.0
+      }
+    }
+  },
+  "MI_Cube-Inflate-Outline": {
+    "parent": "/Game/Painterly/Materials/DemoRoom/Examples/M_Planar-Inflate-Outline.M_Planar-Inflate-Outline",
+    "scalar": {
+      "OutlineOffset": 1.9623290300369263,
+      "TopCylinderOutlineStrength": 0.7224000096321106,
+      "OutlineWidth": 0.10726500302553177,
+      "RefractionDepthBias": 0.0
+    },
+    "vector": {}
+  }
+}

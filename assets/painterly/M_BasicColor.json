@@ -1,0 +1,100 @@
+{
+  "path": "/Game/Painterly/Materials/M_BasicColor",
+  "class": "Material",
+  "settings": {
+    "blend_mode": "<BlendMode.BLEND_OPAQUE: 0>",
+    "shading_model": "<MaterialShadingModel.MSM_DEFAULT_LIT: 1>",
+    "two_sided": false,
+    "material_domain": "<MaterialDomain.MD_SURFACE: 0>",
+    "translucency_lighting_mode": "<TranslucencyLightingMode.TLM_VOLUMETRIC_NON_DIRECTIONAL: 0>",
+    "dither_opacity_mask": false,
+    "use_material_attributes": false,
+    "is_blendable": true,
+    "fully_rough": false,
+    "max_world_position_offset_displacement": 0.0
+  },
+  "parameters": {
+    "scalar": {},
+    "vector": {
+      "BaseColor": {
+        "_t": "LinearColor",
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+      }
+    },
+    "texture": {},
+    "static_switch": {}
+  },
+  "main_outputs": {
+    "base_color": {
+      "expression": "MaterialExpressionVectorParameter_0",
+      "output_name": ""
+    },
+    "metallic": {
+      "expression": "MaterialExpressionConstant_0",
+      "output_name": ""
+    },
+    "specular": {
+      "expression": "MaterialExpressionConstant_0",
+      "output_name": ""
+    },
+    "roughness": {
+      "expression": "MaterialExpressionConstant_1",
+      "output_name": ""
+    },
+    "ambient_occlusion": {
+      "expression": "MaterialExpressionConstant_0",
+      "output_name": ""
+    }
+  },
+  "expressions": {
+    "MaterialExpressionConstant_0": {
+      "_class": "MaterialExpressionConstant",
+      "material_expression_editor_x": -528,
+      "material_expression_editor_y": 224,
+      "r": 0.0,
+      "_name": "MaterialExpressionConstant_0",
+      "_pos": {
+        "x": -528,
+        "y": 224
+      },
+      "_inputs": []
+    },
+    "MaterialExpressionConstant_1": {
+      "_class": "MaterialExpressionConstant",
+      "material_expression_editor_x": -528,
+      "material_expression_editor_y": 304,
+      "r": 1.0,
+      "_name": "MaterialExpressionConstant_1",
+      "_pos": {
+        "x": -528,
+        "y": 304
+      },
+      "_inputs": []
+    },
+    "MaterialExpressionVectorParameter_0": {
+      "_class": "MaterialExpressionVectorParameter",
+      "material_expression_editor_x": -560,
+      "material_expression_editor_y": -16,
+      "parameter_name": "BaseColor",
+      "default_value": {
+        "_t": "LinearColor",
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+      },
+      "group": "None",
+      "sort_priority": 32,
+      "primitive_data_index": 0,
+      "_name": "MaterialExpressionVectorParameter_0",
+      "_pos": {
+        "x": -560,
+        "y": -16
+      },
+      "_inputs": []
+    }
+  }
+}

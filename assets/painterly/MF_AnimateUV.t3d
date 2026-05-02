@@ -1,0 +1,278 @@
+Begin Object Class=/Script/Engine.MaterialFunction Name="MF_AnimateUV" ExportPath="/Script/Engine.MaterialFunction'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV'"
+   Begin Object Class=/Script/Engine.MaterialFunctionEditorOnlyData Name="MF_AnimateUVEditorOnlyData" ExportPath="/Script/Engine.MaterialFunctionEditorOnlyData'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MF_AnimateUVEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionAdd Name="MaterialExpressionAdd_0" ExportPath="/Script/Engine.MaterialExpressionAdd'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionAdd_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionAdd Name="MaterialExpressionAdd_1" ExportPath="/Script/Engine.MaterialExpressionAdd'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionAdd_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionAppendVector Name="MaterialExpressionAppendVector_0" ExportPath="/Script/Engine.MaterialExpressionAppendVector'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionAppendVector_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComponentMask Name="MaterialExpressionComponentMask_0" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComponentMask Name="MaterialExpressionComponentMask_1" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComponentMask Name="MaterialExpressionComponentMask_2" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_2'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComponentMask Name="MaterialExpressionComponentMask_3" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_3'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComponentMask Name="MaterialExpressionComponentMask_6" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_6'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionComponentMask Name="MaterialExpressionComponentMask_7" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_7'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant Name="MaterialExpressionConstant_0" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionConstant_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant2Vector Name="MaterialExpressionConstant2Vector_0" ExportPath="/Script/Engine.MaterialExpressionConstant2Vector'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionConstant2Vector_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant2Vector Name="MaterialExpressionConstant2Vector_1" ExportPath="/Script/Engine.MaterialExpressionConstant2Vector'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionConstant2Vector_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFmod Name="MaterialExpressionFmod_0" ExportPath="/Script/Engine.MaterialExpressionFmod'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFmod_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFmod Name="MaterialExpressionFmod_1" ExportPath="/Script/Engine.MaterialExpressionFmod'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFmod_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFunctionInput Name="MaterialExpressionFunctionInput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionInput_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFunctionInput Name="MaterialExpressionFunctionInput_1" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionInput_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFunctionInput Name="MaterialExpressionFunctionInput_2" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionInput_2'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionFunctionOutput Name="MaterialExpressionFunctionOutput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionOutput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionOutput_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_0" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_1" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_2" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_2'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionMultiply Name="MaterialExpressionMultiply_3" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_3'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionSubtract Name="MaterialExpressionSubtract_0" ExportPath="/Script/Engine.MaterialExpressionSubtract'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionSubtract_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionSubtract Name="MaterialExpressionSubtract_1" ExportPath="/Script/Engine.MaterialExpressionSubtract'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionSubtract_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTextureCoordinate Name="MaterialExpressionTextureCoordinate_1" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionTextureCoordinate_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionTime Name="MaterialExpressionTime_0" ExportPath="/Script/Engine.MaterialExpressionTime'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionTime_0'"
+   End Object
+   Begin Object Name="MF_AnimateUVEditorOnlyData" ExportPath="/Script/Engine.MaterialFunctionEditorOnlyData'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MF_AnimateUVEditorOnlyData'"
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionFunctionOutput'MF_AnimateUV:MaterialExpressionFunctionOutput_0'","/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_0'","/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_0'","/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_1'","/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_1'","/Script/Engine.MaterialExpressionConstant2Vector'MF_AnimateUV:MaterialExpressionConstant2Vector_0'","/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_2'","/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_3'","/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_2'","/Script/Engine.MaterialExpressionConstant'MF_AnimateUV:MaterialExpressionConstant_0'","/Script/Engine.MaterialExpressionTextureCoordinate'MF_AnimateUV:MaterialExpressionTextureCoordinate_1'","/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_6'","/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_7'","/Script/Engine.MaterialExpressionConstant2Vector'MF_AnimateUV:MaterialExpressionConstant2Vector_1'","/Script/Engine.MaterialExpressionTime'MF_AnimateUV:MaterialExpressionTime_0'","/Script/Engine.MaterialExpressionFmod'MF_AnimateUV:MaterialExpressionFmod_0'","/Script/Engine.MaterialExpressionFmod'MF_AnimateUV:MaterialExpressionFmod_1'","/Script/Engine.MaterialExpressionSubtract'MF_AnimateUV:MaterialExpressionSubtract_0'","/Script/Engine.MaterialExpressionSubtract'MF_AnimateUV:MaterialExpressionSubtract_1'","/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_0'","/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_1'","/Script/Engine.MaterialExpressionAdd'MF_AnimateUV:MaterialExpressionAdd_0'","/Script/Engine.MaterialExpressionAdd'MF_AnimateUV:MaterialExpressionAdd_1'","/Script/Engine.MaterialExpressionAppendVector'MF_AnimateUV:MaterialExpressionAppendVector_0'","/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_2'","/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_3'"))
+   End Object
+   Begin Object Name="MaterialExpressionAdd_0" ExportPath="/Script/Engine.MaterialExpressionAdd'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionAdd_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_2'")
+      B=(Expression="/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_0'")
+      MaterialExpressionEditorX=208
+      MaterialExpressionEditorY=304
+      MaterialExpressionGuid=8E89BBC64BF4C0E3FB7D21A00674D5B2
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionAdd_1" ExportPath="/Script/Engine.MaterialExpressionAdd'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionAdd_1'"
+      A=(Expression="/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_3'")
+      B=(Expression="/Script/Engine.MaterialExpressionMultiply'MF_AnimateUV:MaterialExpressionMultiply_1'")
+      MaterialExpressionEditorX=176
+      MaterialExpressionEditorY=928
+      MaterialExpressionGuid=355E25C9491960AC68D286913FC9CFFB
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionAppendVector_0" ExportPath="/Script/Engine.MaterialExpressionAppendVector'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionAppendVector_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionAdd'MF_AnimateUV:MaterialExpressionAdd_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionAdd'MF_AnimateUV:MaterialExpressionAdd_1'")
+      MaterialExpressionEditorX=384
+      MaterialExpressionEditorY=304
+      MaterialExpressionGuid=9D939CF340765BE6E185F481BF5ACCF9
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionComponentMask_0" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_0'"
+      Input=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_0'")
+      R=True
+      MaterialExpressionEditorX=-704
+      MaterialExpressionEditorY=288
+      MaterialExpressionGuid=790D0FF94D5402310DD775A7D1721B23
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionComponentMask_1" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_1'"
+      Input=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_0'")
+      G=True
+      MaterialExpressionEditorX=-704
+      MaterialExpressionEditorY=384
+      MaterialExpressionGuid=3678950D43B85CC3B60A72A0095367B5
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionComponentMask_2" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_2'"
+      Input=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_1'")
+      R=True
+      MaterialExpressionEditorX=-704
+      MaterialExpressionEditorY=544
+      MaterialExpressionGuid=79A4D0624483D9C615A40DBD0DE12259
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionComponentMask_3" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_3'"
+      Input=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_1'")
+      G=True
+      MaterialExpressionEditorX=-704
+      MaterialExpressionEditorY=640
+      MaterialExpressionGuid=C9156F8C4E64080C74D4A4B1AC35E7A7
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionComponentMask_6" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_6'"
+      Input=(Expression="/Script/Engine.MaterialExpressionTextureCoordinate'MF_AnimateUV:MaterialExpressionTextureCoordinate_1'")
+      R=True
+      MaterialExpressionEditorX=-736
+      MaterialExpressionEditorY=1072
+      MaterialExpressionGuid=37DB6A104F7A69037133D893A8C25DDE
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionComponentMask_7" ExportPath="/Script/Engine.MaterialExpressionComponentMask'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionComponentMask_7'"
+      Input=(Expression="/Script/Engine.MaterialExpressionTextureCoordinate'MF_AnimateUV:MaterialExpressionTextureCoordinate_1'")
+      G=True
+      MaterialExpressionEditorX=-736
+      MaterialExpressionEditorY=1168
+      MaterialExpressionGuid=0DDAACA8488DDF3B9D29BF8E128DB600
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionConstant_0" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionConstant_0'"
+      R=1.000000
+      MaterialExpressionEditorX=-1200
+      MaterialExpressionEditorY=800
+      MaterialExpressionGuid=FEB6772E411D60B46B6345B1FE828F15
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionConstant2Vector_0" ExportPath="/Script/Engine.MaterialExpressionConstant2Vector'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionConstant2Vector_0'"
+      R=1.000000
+      G=1.000000
+      MaterialExpressionEditorX=-1200
+      MaterialExpressionEditorY=288
+      MaterialExpressionGuid=5F8E12D14ACB92DCE22DA9B6CEA937E1
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionConstant2Vector_1" ExportPath="/Script/Engine.MaterialExpressionConstant2Vector'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionConstant2Vector_1'"
+      R=1.000000
+      G=1.000000
+      MaterialExpressionEditorX=-1216
+      MaterialExpressionEditorY=544
+      MaterialExpressionGuid=A8AFB5C649FDB3C206BD09907FF09563
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionFmod_0" ExportPath="/Script/Engine.MaterialExpressionFmod'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFmod_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionTime'MF_AnimateUV:MaterialExpressionTime_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_0'")
+      MaterialExpressionEditorX=-336
+      MaterialExpressionEditorY=256
+      MaterialExpressionGuid=0DC073254ABACA28674D35A27D21A487
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionFmod_1" ExportPath="/Script/Engine.MaterialExpressionFmod'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFmod_1'"
+      A=(Expression="/Script/Engine.MaterialExpressionTime'MF_AnimateUV:MaterialExpressionTime_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_1'")
+      MaterialExpressionEditorX=-384
+      MaterialExpressionEditorY=464
+      MaterialExpressionGuid=C99C186A436606FB1FF0CF88EFC49853
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionFunctionInput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionInput_0'"
+      Preview=(Expression="/Script/Engine.MaterialExpressionConstant2Vector'MF_AnimateUV:MaterialExpressionConstant2Vector_0'",Mask=1,MaskR=1,MaskG=1)
+      InputName="Step Time"
+      Id=E1A8950C4F831FB71D05D7B1173866C3
+      InputType=FunctionInput_Vector2
+      bUsePreviewValueAsDefault=True
+      MaterialExpressionEditorX=-992
+      MaterialExpressionEditorY=288
+      MaterialExpressionGuid=F78119674C52688DA9FF9597615FD815
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionFunctionInput_1" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionInput_1'"
+      Preview=(Expression="/Script/Engine.MaterialExpressionConstant2Vector'MF_AnimateUV:MaterialExpressionConstant2Vector_1'",Mask=1,MaskR=1,MaskG=1)
+      InputName="Step Size"
+      Id=03720B9E45DF947C8DFECBB4D9C65947
+      InputType=FunctionInput_Vector2
+      bUsePreviewValueAsDefault=True
+      SortPriority=1
+      MaterialExpressionEditorX=-992
+      MaterialExpressionEditorY=544
+      MaterialExpressionGuid=789E05464B0CA8FA3B46648B5804389B
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionFunctionInput_2" ExportPath="/Script/Engine.MaterialExpressionFunctionInput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionInput_2'"
+      Preview=(Expression="/Script/Engine.MaterialExpressionConstant'MF_AnimateUV:MaterialExpressionConstant_0'")
+      InputName="Tiling"
+      Id=0BE1D2EE4EDF75A5563899B4C0F44917
+      InputType=FunctionInput_Scalar
+      SortPriority=3
+      MaterialExpressionEditorX=-992
+      MaterialExpressionEditorY=800
+      MaterialExpressionGuid=E1CA4935410DC7E1A1699CB0E8E7B245
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionFunctionOutput_0" ExportPath="/Script/Engine.MaterialExpressionFunctionOutput'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionFunctionOutput_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionAppendVector'MF_AnimateUV:MaterialExpressionAppendVector_0'")
+      bLastPreviewed=True
+      Id=14955B5D4497382903971AB1AC106254
+      MaterialExpressionEditorX=560
+      MaterialExpressionEditorY=304
+      MaterialExpressionGuid=CF886A614F580DC373C5D29DB8499715
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_0" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionSubtract'MF_AnimateUV:MaterialExpressionSubtract_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_2'")
+      MaterialExpressionEditorX=-48
+      MaterialExpressionEditorY=272
+      MaterialExpressionGuid=0EDE525A426A7E586B4F22B21AEBA2CD
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_1" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_1'"
+      A=(Expression="/Script/Engine.MaterialExpressionSubtract'MF_AnimateUV:MaterialExpressionSubtract_1'")
+      B=(Expression="/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_3'")
+      MaterialExpressionEditorX=-16
+      MaterialExpressionEditorY=608
+      MaterialExpressionGuid=91B2CA794132FDD7256A9AA417470A32
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_2" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_2'"
+      A=(Expression="/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_6'")
+      B=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_2'")
+      MaterialExpressionEditorX=-480
+      MaterialExpressionEditorY=800
+      MaterialExpressionGuid=33D5B9404BE866FA5A3AD3B5D02C8D72
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionMultiply_3" ExportPath="/Script/Engine.MaterialExpressionMultiply'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionMultiply_3'"
+      A=(Expression="/Script/Engine.MaterialExpressionComponentMask'MF_AnimateUV:MaterialExpressionComponentMask_7'")
+      B=(Expression="/Script/Engine.MaterialExpressionFunctionInput'MF_AnimateUV:MaterialExpressionFunctionInput_2'")
+      MaterialExpressionEditorX=-464
+      MaterialExpressionEditorY=928
+      MaterialExpressionGuid=3D0D23624A9E4007A14183993E10A1AD
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionSubtract_0" ExportPath="/Script/Engine.MaterialExpressionSubtract'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionSubtract_0'"
+      A=(Expression="/Script/Engine.MaterialExpressionTime'MF_AnimateUV:MaterialExpressionTime_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionFmod'MF_AnimateUV:MaterialExpressionFmod_0'")
+      MaterialExpressionEditorX=-224
+      MaterialExpressionEditorY=112
+      MaterialExpressionGuid=4DED63EF42A7A0A5E1EFC2885F85D352
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionSubtract_1" ExportPath="/Script/Engine.MaterialExpressionSubtract'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionSubtract_1'"
+      A=(Expression="/Script/Engine.MaterialExpressionTime'MF_AnimateUV:MaterialExpressionTime_0'")
+      B=(Expression="/Script/Engine.MaterialExpressionFmod'MF_AnimateUV:MaterialExpressionFmod_1'")
+      MaterialExpressionEditorX=-192
+      MaterialExpressionEditorY=432
+      MaterialExpressionGuid=8EB02ABD4C0F9FC0EA78998A8CF2DDD2
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionTextureCoordinate_1" ExportPath="/Script/Engine.MaterialExpressionTextureCoordinate'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionTextureCoordinate_1'"
+      MaterialExpressionEditorX=-1024
+      MaterialExpressionEditorY=1072
+      MaterialExpressionGuid=B451B5594EEA7B0AE5917EB0B3DAD118
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   Begin Object Name="MaterialExpressionTime_0" ExportPath="/Script/Engine.MaterialExpressionTime'/Game/Painterly/Materials/Material-Functions/MF_AnimateUV.MF_AnimateUV:MaterialExpressionTime_0'"
+      MaterialExpressionEditorX=-736
+      MaterialExpressionEditorY=80
+      MaterialExpressionGuid=4DEA63AD4765CEAEBA41BD9EE6EC7F6F
+      Function="/Script/Engine.MaterialFunction'MF_AnimateUV'"
+   End Object
+   bExposeToLibrary=True
+   EditorOnlyData="/Script/Engine.MaterialFunctionEditorOnlyData'MF_AnimateUVEditorOnlyData'"
+   StateId=D8B131E84D25B2E96A2986BA54EC2927
+   CombinedInputTypes=15
+   CombinedOutputTypes=15
+End Object

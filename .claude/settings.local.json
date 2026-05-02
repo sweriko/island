@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(npx tsc --noEmit)"
+      "PowerShell(npx tsc --noEmit)",
+      "Bash(\"/c/Program Files/Epic Games/UE_5.6/Engine/Binaries/Win64/UnrealEditor-Cmd.exe\" \"C:/Users/erase/island/.tmp/painterly-ue5/PainterlyShader.uproject\" -run=pythonscript -script=\"C:/Users/erase/island/assets/painterly/probe.py\" -unattended -nopause -nullrhi)",
+      "Bash(\"/c/Program Files/Epic Games/UE_5.6/Engine/Binaries/Win64/UnrealEditor-Cmd.exe\" \"C:/Users/erase/island/.tmp/painterly-ue5/PainterlyShader.uproject\" -run=pythonscript -script=\"C:/Users/erase/island/assets/painterly/dump_painterly.py\" -unattended -nopause -nullrhi)",
+      "Bash(grep -B1 -A4 \"MaterialExpressionTextureSample.*{$\" \"C:/Users/erase/island/assets/painterly/M_PainterlyShader.json\")"
     ]
   }
 }

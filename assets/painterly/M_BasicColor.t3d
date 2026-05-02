@@ -1,0 +1,65 @@
+Begin Object Class=/Script/Engine.Material Name="M_BasicColor" ExportPath="/Script/Engine.Material'/Game/Painterly/Materials/M_BasicColor.M_BasicColor'"
+   Begin Object Class=/Script/Engine.MaterialEditorOnlyData Name="M_BasicColorEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:M_BasicColorEditorOnlyData'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant Name="MaterialExpressionConstant_0" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:MaterialExpressionConstant_0'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionConstant Name="MaterialExpressionConstant_1" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:MaterialExpressionConstant_1'"
+   End Object
+   Begin Object Class=/Script/Engine.MaterialExpressionVectorParameter Name="MaterialExpressionVectorParameter_0" ExportPath="/Script/Engine.MaterialExpressionVectorParameter'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:MaterialExpressionVectorParameter_0'"
+   End Object
+   Begin Object Name="M_BasicColorEditorOnlyData" ExportPath="/Script/Engine.MaterialEditorOnlyData'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:M_BasicColorEditorOnlyData'"
+      BaseColor=(Expression="/Script/Engine.MaterialExpressionVectorParameter'M_BasicColor:MaterialExpressionVectorParameter_0'",Mask=1,MaskR=1,MaskG=1,MaskB=1)
+      Metallic=(Expression="/Script/Engine.MaterialExpressionConstant'M_BasicColor:MaterialExpressionConstant_0'")
+      Specular=(Expression="/Script/Engine.MaterialExpressionConstant'M_BasicColor:MaterialExpressionConstant_0'")
+      Roughness=(Expression="/Script/Engine.MaterialExpressionConstant'M_BasicColor:MaterialExpressionConstant_1'")
+      Normal=(UseConstant=True)
+      Tangent=(UseConstant=True)
+      EmissiveColor=(UseConstant=True)
+      Opacity=(UseConstant=True)
+      OpacityMask=(UseConstant=True)
+      SubsurfaceColor=(UseConstant=True)
+      ClearCoat=(UseConstant=True)
+      ClearCoatRoughness=(UseConstant=True)
+      AmbientOcclusion=(Expression="/Script/Engine.MaterialExpressionConstant'M_BasicColor:MaterialExpressionConstant_0'")
+      Refraction=(UseConstant=True)
+      CustomizedUVs(0)=(UseConstant=True)
+      CustomizedUVs(1)=(UseConstant=True)
+      CustomizedUVs(2)=(UseConstant=True)
+      CustomizedUVs(3)=(UseConstant=True)
+      CustomizedUVs(4)=(UseConstant=True)
+      CustomizedUVs(5)=(UseConstant=True)
+      CustomizedUVs(6)=(UseConstant=True)
+      CustomizedUVs(7)=(UseConstant=True)
+      SurfaceThickness=(UseConstant=True)
+      ExpressionCollection=(Expressions=("/Script/Engine.MaterialExpressionVectorParameter'M_BasicColor:MaterialExpressionVectorParameter_0'","/Script/Engine.MaterialExpressionConstant'M_BasicColor:MaterialExpressionConstant_0'","/Script/Engine.MaterialExpressionConstant'M_BasicColor:MaterialExpressionConstant_1'"))
+      ParameterGroupData(0)=(GroupName="None")
+   End Object
+   Begin Object Name="MaterialExpressionConstant_0" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:MaterialExpressionConstant_0'"
+      MaterialExpressionEditorX=-528
+      MaterialExpressionEditorY=224
+      MaterialExpressionGuid=780FD09045609D4A939E739A11F365B7
+      Material="/Script/Engine.Material'M_BasicColor'"
+   End Object
+   Begin Object Name="MaterialExpressionConstant_1" ExportPath="/Script/Engine.MaterialExpressionConstant'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:MaterialExpressionConstant_1'"
+      R=1.000000
+      MaterialExpressionEditorX=-528
+      MaterialExpressionEditorY=304
+      MaterialExpressionGuid=106A5C084BFBEA69CE0AA58643BE7B8B
+      Material="/Script/Engine.Material'M_BasicColor'"
+   End Object
+   Begin Object Name="MaterialExpressionVectorParameter_0" ExportPath="/Script/Engine.MaterialExpressionVectorParameter'/Game/Painterly/Materials/M_BasicColor.M_BasicColor:MaterialExpressionVectorParameter_0'"
+      DefaultValue=(R=0.000000,G=0.000000,B=0.000000,A=1.000000)
+      ParameterName="BaseColor"
+      ExpressionGUID=20CB8AE34F536DBF00E57684528293CE
+      MaterialExpressionEditorX=-560
+      MaterialExpressionEditorY=-16
+      MaterialExpressionGuid=B3D9B4CE4E9242FB3B8EA78A48BCCF4D
+      Material="/Script/Engine.Material'M_BasicColor'"
+   End Object
+   bUsedWithInstancedStaticMeshes=True
+   bUsedWithNanite=True
+   bCanMaskedBeAssumedOpaque=True
+   StateId=1CCAFEBB4C982577A63886B27357742B
+   EditorOnlyData="/Script/Engine.MaterialEditorOnlyData'M_BasicColorEditorOnlyData'"
+   LightingGuid=9B8B5E2448879C1723633C8624DF2EA4
+End Object

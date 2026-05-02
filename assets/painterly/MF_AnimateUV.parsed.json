@@ -1,0 +1,516 @@
+{
+  "MF_AnimateUV": {
+    "class": "MaterialFunction"
+  },
+  "MF_AnimateUVEditorOnlyData": {
+    "class": "MaterialFunctionEditorOnlyData",
+    "ExpressionCollection": {
+      "Expressions": [
+        {
+          "$ref": "MaterialExpressionFunctionOutput_0"
+        },
+        {
+          "$ref": "MaterialExpressionFunctionInput_0"
+        },
+        {
+          "$ref": "MaterialExpressionComponentMask_0"
+        },
+        {
+          "$ref": "MaterialExpressionComponentMask_1"
+        },
+        {
+          "$ref": "MaterialExpressionFunctionInput_1"
+        },
+        {
+          "$ref": "MaterialExpressionConstant2Vector_0"
+        },
+        {
+          "$ref": "MaterialExpressionComponentMask_2"
+        },
+        {
+          "$ref": "MaterialExpressionComponentMask_3"
+        },
+        {
+          "$ref": "MaterialExpressionFunctionInput_2"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_0"
+        },
+        {
+          "$ref": "MaterialExpressionTextureCoordinate_1"
+        },
+        {
+          "$ref": "MaterialExpressionComponentMask_6"
+        },
+        {
+          "$ref": "MaterialExpressionComponentMask_7"
+        },
+        {
+          "$ref": "MaterialExpressionConstant2Vector_1"
+        },
+        {
+          "$ref": "MaterialExpressionTime_0"
+        },
+        {
+          "$ref": "MaterialExpressionFmod_0"
+        },
+        {
+          "$ref": "MaterialExpressionFmod_1"
+        },
+        {
+          "$ref": "MaterialExpressionSubtract_0"
+        },
+        {
+          "$ref": "MaterialExpressionSubtract_1"
+        },
+        {
+          "$ref": "MaterialExpressionMultiply_0"
+        },
+        {
+          "$ref": "MaterialExpressionMultiply_1"
+        },
+        {
+          "$ref": "MaterialExpressionAdd_0"
+        },
+        {
+          "$ref": "MaterialExpressionAdd_1"
+        },
+        {
+          "$ref": "MaterialExpressionAppendVector_0"
+        },
+        {
+          "$ref": "MaterialExpressionMultiply_2"
+        },
+        {
+          "$ref": "MaterialExpressionMultiply_3"
+        }
+      ]
+    }
+  },
+  "MaterialExpressionAdd_0": {
+    "class": "MaterialExpressionAdd",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionMultiply_2"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionMultiply_0"
+      }
+    },
+    "MaterialExpressionEditorX": 208,
+    "MaterialExpressionEditorY": 304,
+    "MaterialExpressionGuid": "8E89BBC64BF4C0E3FB7D21A00674D5B2",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionAdd_1": {
+    "class": "MaterialExpressionAdd",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionMultiply_3"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionMultiply_1"
+      }
+    },
+    "MaterialExpressionEditorX": 176,
+    "MaterialExpressionEditorY": 928,
+    "MaterialExpressionGuid": "355E25C9491960AC68D286913FC9CFFB",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionAppendVector_0": {
+    "class": "MaterialExpressionAppendVector",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionAdd_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionAdd_1"
+      }
+    },
+    "MaterialExpressionEditorX": 384,
+    "MaterialExpressionEditorY": 304,
+    "MaterialExpressionGuid": "9D939CF340765BE6E185F481BF5ACCF9",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionComponentMask_0": {
+    "class": "MaterialExpressionComponentMask",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_0"
+      }
+    },
+    "R": true,
+    "MaterialExpressionEditorX": -704,
+    "MaterialExpressionEditorY": 288,
+    "MaterialExpressionGuid": "790D0FF94D5402310DD775A7D1721B23",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionComponentMask_1": {
+    "class": "MaterialExpressionComponentMask",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_0"
+      }
+    },
+    "G": true,
+    "MaterialExpressionEditorX": -704,
+    "MaterialExpressionEditorY": 384,
+    "MaterialExpressionGuid": "3678950D43B85CC3B60A72A0095367B5",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionComponentMask_2": {
+    "class": "MaterialExpressionComponentMask",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_1"
+      }
+    },
+    "R": true,
+    "MaterialExpressionEditorX": -704,
+    "MaterialExpressionEditorY": 544,
+    "MaterialExpressionGuid": "79A4D0624483D9C615A40DBD0DE12259",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionComponentMask_3": {
+    "class": "MaterialExpressionComponentMask",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_1"
+      }
+    },
+    "G": true,
+    "MaterialExpressionEditorX": -704,
+    "MaterialExpressionEditorY": 640,
+    "MaterialExpressionGuid": "C9156F8C4E64080C74D4A4B1AC35E7A7",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionComponentMask_6": {
+    "class": "MaterialExpressionComponentMask",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionTextureCoordinate_1"
+      }
+    },
+    "R": true,
+    "MaterialExpressionEditorX": -736,
+    "MaterialExpressionEditorY": 1072,
+    "MaterialExpressionGuid": "37DB6A104F7A69037133D893A8C25DDE",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionComponentMask_7": {
+    "class": "MaterialExpressionComponentMask",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionTextureCoordinate_1"
+      }
+    },
+    "G": true,
+    "MaterialExpressionEditorX": -736,
+    "MaterialExpressionEditorY": 1168,
+    "MaterialExpressionGuid": "0DDAACA8488DDF3B9D29BF8E128DB600",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionConstant_0": {
+    "class": "MaterialExpressionConstant",
+    "R": 1.0,
+    "MaterialExpressionEditorX": -1200,
+    "MaterialExpressionEditorY": 800,
+    "MaterialExpressionGuid": "FEB6772E411D60B46B6345B1FE828F15",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionConstant2Vector_0": {
+    "class": "MaterialExpressionConstant2Vector",
+    "R": 1.0,
+    "G": 1.0,
+    "MaterialExpressionEditorX": -1200,
+    "MaterialExpressionEditorY": 288,
+    "MaterialExpressionGuid": "5F8E12D14ACB92DCE22DA9B6CEA937E1",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionConstant2Vector_1": {
+    "class": "MaterialExpressionConstant2Vector",
+    "R": 1.0,
+    "G": 1.0,
+    "MaterialExpressionEditorX": -1216,
+    "MaterialExpressionEditorY": 544,
+    "MaterialExpressionGuid": "A8AFB5C649FDB3C206BD09907FF09563",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionFmod_0": {
+    "class": "MaterialExpressionFmod",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionTime_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionComponentMask_0"
+      }
+    },
+    "MaterialExpressionEditorX": -336,
+    "MaterialExpressionEditorY": 256,
+    "MaterialExpressionGuid": "0DC073254ABACA28674D35A27D21A487",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionFmod_1": {
+    "class": "MaterialExpressionFmod",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionTime_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionComponentMask_1"
+      }
+    },
+    "MaterialExpressionEditorX": -384,
+    "MaterialExpressionEditorY": 464,
+    "MaterialExpressionGuid": "C99C186A436606FB1FF0CF88EFC49853",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionFunctionInput_0": {
+    "class": "MaterialExpressionFunctionInput",
+    "Preview": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant2Vector_0"
+      },
+      "Mask": 1,
+      "MaskR": 1,
+      "MaskG": 1
+    },
+    "InputName": "Step Time",
+    "Id": "E1A8950C4F831FB71D05D7B1173866C3",
+    "InputType": "FunctionInput_Vector2",
+    "bUsePreviewValueAsDefault": true,
+    "MaterialExpressionEditorX": -992,
+    "MaterialExpressionEditorY": 288,
+    "MaterialExpressionGuid": "F78119674C52688DA9FF9597615FD815",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionFunctionInput_1": {
+    "class": "MaterialExpressionFunctionInput",
+    "Preview": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant2Vector_1"
+      },
+      "Mask": 1,
+      "MaskR": 1,
+      "MaskG": 1
+    },
+    "InputName": "Step Size",
+    "Id": "03720B9E45DF947C8DFECBB4D9C65947",
+    "InputType": "FunctionInput_Vector2",
+    "bUsePreviewValueAsDefault": true,
+    "SortPriority": 1,
+    "MaterialExpressionEditorX": -992,
+    "MaterialExpressionEditorY": 544,
+    "MaterialExpressionGuid": "789E05464B0CA8FA3B46648B5804389B",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionFunctionInput_2": {
+    "class": "MaterialExpressionFunctionInput",
+    "Preview": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_0"
+      }
+    },
+    "InputName": "Tiling",
+    "Id": "0BE1D2EE4EDF75A5563899B4C0F44917",
+    "InputType": "FunctionInput_Scalar",
+    "SortPriority": 3,
+    "MaterialExpressionEditorX": -992,
+    "MaterialExpressionEditorY": 800,
+    "MaterialExpressionGuid": "E1CA4935410DC7E1A1699CB0E8E7B245",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionFunctionOutput_0": {
+    "class": "MaterialExpressionFunctionOutput",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionAppendVector_0"
+      }
+    },
+    "bLastPreviewed": true,
+    "Id": "14955B5D4497382903971AB1AC106254",
+    "MaterialExpressionEditorX": 560,
+    "MaterialExpressionEditorY": 304,
+    "MaterialExpressionGuid": "CF886A614F580DC373C5D29DB8499715",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionMultiply_0": {
+    "class": "MaterialExpressionMultiply",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionSubtract_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionComponentMask_2"
+      }
+    },
+    "MaterialExpressionEditorX": -48,
+    "MaterialExpressionEditorY": 272,
+    "MaterialExpressionGuid": "0EDE525A426A7E586B4F22B21AEBA2CD",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionMultiply_1": {
+    "class": "MaterialExpressionMultiply",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionSubtract_1"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionComponentMask_3"
+      }
+    },
+    "MaterialExpressionEditorX": -16,
+    "MaterialExpressionEditorY": 608,
+    "MaterialExpressionGuid": "91B2CA794132FDD7256A9AA417470A32",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionMultiply_2": {
+    "class": "MaterialExpressionMultiply",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionComponentMask_6"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_2"
+      }
+    },
+    "MaterialExpressionEditorX": -480,
+    "MaterialExpressionEditorY": 800,
+    "MaterialExpressionGuid": "33D5B9404BE866FA5A3AD3B5D02C8D72",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionMultiply_3": {
+    "class": "MaterialExpressionMultiply",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionComponentMask_7"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_2"
+      }
+    },
+    "MaterialExpressionEditorX": -464,
+    "MaterialExpressionEditorY": 928,
+    "MaterialExpressionGuid": "3D0D23624A9E4007A14183993E10A1AD",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionSubtract_0": {
+    "class": "MaterialExpressionSubtract",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionTime_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionFmod_0"
+      }
+    },
+    "MaterialExpressionEditorX": -224,
+    "MaterialExpressionEditorY": 112,
+    "MaterialExpressionGuid": "4DED63EF42A7A0A5E1EFC2885F85D352",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionSubtract_1": {
+    "class": "MaterialExpressionSubtract",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionTime_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionFmod_1"
+      }
+    },
+    "MaterialExpressionEditorX": -192,
+    "MaterialExpressionEditorY": 432,
+    "MaterialExpressionGuid": "8EB02ABD4C0F9FC0EA78998A8CF2DDD2",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionTextureCoordinate_1": {
+    "class": "MaterialExpressionTextureCoordinate",
+    "MaterialExpressionEditorX": -1024,
+    "MaterialExpressionEditorY": 1072,
+    "MaterialExpressionGuid": "B451B5594EEA7B0AE5917EB0B3DAD118",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  },
+  "MaterialExpressionTime_0": {
+    "class": "MaterialExpressionTime",
+    "MaterialExpressionEditorX": -736,
+    "MaterialExpressionEditorY": 80,
+    "MaterialExpressionGuid": "4DEA63AD4765CEAEBA41BD9EE6EC7F6F",
+    "Function": {
+      "$ref": "MF_AnimateUV"
+    }
+  }
+}

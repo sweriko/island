@@ -1,0 +1,252 @@
+{
+  "MF_SwitchByInstanceData": {
+    "class": "MaterialFunction"
+  },
+  "MF_SwitchByInstanceDataEditorOnlyData": {
+    "class": "MaterialFunctionEditorOnlyData",
+    "ExpressionCollection": {
+      "Expressions": [
+        {
+          "$ref": "MaterialExpressionFunctionOutput_0"
+        },
+        {
+          "$ref": "MaterialExpressionFunctionOutput_1"
+        },
+        {
+          "$ref": "MaterialExpressionFunctionInput_1"
+        },
+        {
+          "$ref": "MaterialExpressionPerInstanceCustomData_1"
+        },
+        {
+          "$ref": "MaterialExpressionIf_0"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_0"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_1"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_2"
+        },
+        {
+          "$ref": "MaterialExpressionIf_1"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_3"
+        },
+        {
+          "$ref": "MaterialExpressionReroute_0"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_5"
+        },
+        {
+          "$ref": "MaterialExpressionConstant_6"
+        }
+      ]
+    }
+  },
+  "MaterialExpressionConstant_0": {
+    "class": "MaterialExpressionConstant",
+    "R": 0.5,
+    "MaterialExpressionEditorX": -752,
+    "MaterialExpressionEditorY": 272,
+    "MaterialExpressionGuid": "52C79DA44EF3D6FBBEFCB69495C6974A",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionConstant_1": {
+    "class": "MaterialExpressionConstant",
+    "R": 1.0,
+    "MaterialExpressionEditorX": -768,
+    "MaterialExpressionEditorY": 416,
+    "MaterialExpressionGuid": "6E17B73A4BE1B90C530EEE97162F3CB3",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionConstant_2": {
+    "class": "MaterialExpressionConstant",
+    "MaterialExpressionEditorX": -752,
+    "MaterialExpressionEditorY": 512,
+    "MaterialExpressionGuid": "92AAD6164AD2E4DBA465B187FDC85E99",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionConstant_3": {
+    "class": "MaterialExpressionConstant",
+    "R": 1.5,
+    "MaterialExpressionEditorX": -768,
+    "MaterialExpressionEditorY": 672,
+    "MaterialExpressionGuid": "CAFA0CFB4CBB14E00DD15CB6CBB54252",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionConstant_5": {
+    "class": "MaterialExpressionConstant",
+    "R": 1.0,
+    "MaterialExpressionEditorX": -768,
+    "MaterialExpressionEditorY": 736,
+    "MaterialExpressionGuid": "9400E3594D66E193B87DF5BEA0387F67",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionConstant_6": {
+    "class": "MaterialExpressionConstant",
+    "MaterialExpressionEditorX": -768,
+    "MaterialExpressionEditorY": 816,
+    "MaterialExpressionGuid": "E95FB6F5434B5ED917098CBE386FB5AA",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionFunctionInput_1": {
+    "class": "MaterialExpressionFunctionInput",
+    "Preview": {
+      "Expression": {
+        "$ref": "MaterialExpressionPerInstanceCustomData_1"
+      }
+    },
+    "InputName": "PerInstanceCustomData",
+    "Id": "856E0B414BCEF542EE4AC7B4995CF466",
+    "InputType": "FunctionInput_Scalar",
+    "bUsePreviewValueAsDefault": true,
+    "MaterialExpressionEditorX": -1216,
+    "MaterialExpressionEditorY": 352,
+    "MaterialExpressionGuid": "06EA73DF400ECA774408B9AAB1D30BEA",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionFunctionOutput_0": {
+    "class": "MaterialExpressionFunctionOutput",
+    "OutputName": "Base_vs_Rim",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionIf_0"
+      }
+    },
+    "bLastPreviewed": true,
+    "Id": "29E214994A4349FC0DDA22AE93A82362",
+    "MaterialExpressionEditorX": -320,
+    "MaterialExpressionEditorY": 352,
+    "MaterialExpressionGuid": "F6BDCFB64B3AD2186940B7ACC98502F8",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionFunctionOutput_1": {
+    "class": "MaterialExpressionFunctionOutput",
+    "OutputName": "Combined_vs_Outline",
+    "SortPriority": 1,
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionIf_1"
+      }
+    },
+    "Id": "4EE5443E446CF7344F73EB9833172F1B",
+    "MaterialExpressionEditorX": -368,
+    "MaterialExpressionEditorY": 624,
+    "MaterialExpressionGuid": "5FACA067465329A2A80E31BFFB4538D9",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionIf_0": {
+    "class": "MaterialExpressionIf",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_1"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_0"
+      }
+    },
+    "AGreaterThanB": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_1"
+      }
+    },
+    "AEqualsB": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_2"
+      }
+    },
+    "ALessThanB": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_2"
+      }
+    },
+    "MaterialExpressionEditorX": -560,
+    "MaterialExpressionEditorY": 352,
+    "MaterialExpressionGuid": "C087A5624FF57A89FAFBBC9F817F3319",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionIf_1": {
+    "class": "MaterialExpressionIf",
+    "A": {
+      "Expression": {
+        "$ref": "MaterialExpressionReroute_0"
+      }
+    },
+    "B": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_3"
+      }
+    },
+    "AGreaterThanB": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_5"
+      }
+    },
+    "AEqualsB": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_6"
+      }
+    },
+    "ALessThanB": {
+      "Expression": {
+        "$ref": "MaterialExpressionConstant_6"
+      }
+    },
+    "MaterialExpressionEditorX": -560,
+    "MaterialExpressionEditorY": 624,
+    "MaterialExpressionGuid": "3B92D42644FD2CC61B8D3A9D73F7A610",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionPerInstanceCustomData_1": {
+    "class": "MaterialExpressionPerInstanceCustomData",
+    "MaterialExpressionEditorX": -1472,
+    "MaterialExpressionEditorY": 336,
+    "MaterialExpressionGuid": "5A82464D44A06EBF03EBCE9252A9DA32",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  },
+  "MaterialExpressionReroute_0": {
+    "class": "MaterialExpressionReroute",
+    "Input": {
+      "Expression": {
+        "$ref": "MaterialExpressionFunctionInput_1"
+      }
+    },
+    "MaterialExpressionEditorX": -848,
+    "MaterialExpressionEditorY": 656,
+    "MaterialExpressionGuid": "27F9F4C648F762433254F58047915241",
+    "Function": {
+      "$ref": "MF_SwitchByInstanceData"
+    }
+  }
+}
