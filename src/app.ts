@@ -67,7 +67,7 @@ export class App {
   private readonly timer = new THREE.Timer();
   private readonly controls: OrbitControls;
   private readonly input: Input;
-  private readonly overlay = buildOverlay();
+  private readonly crosshair = buildCrosshair();
 
   private readonly stats = new Stats({ trackGPU: true });
   private readonly pane: Pane;
@@ -107,7 +107,7 @@ export class App {
 
     this.input = new Input(this.renderer.domElement);
     this.input.onLockChange = (locked) => {
-      this.overlay.root.classList.toggle("overlay--playing", locked);
+      this.crosshair.classList.toggle("crosshair--visible", locked);
     };
 
     this.timer.connect(document);
@@ -121,7 +121,7 @@ export class App {
     paneHost.className = "ui-pane";
     this.pane = new Pane({ container: paneHost, title: "Controls" });
 
-    this.container.append(this.renderer.domElement, this.overlay.root, this.stats.dom, paneHost);
+    this.container.append(this.renderer.domElement, this.crosshair, this.stats.dom, paneHost);
   }
 
   async init(): Promise<void> {
@@ -210,7 +210,6 @@ export class App {
     this.settings.camera = mode;
     this.controls.enabled = !playing;
     this.input.autoLock = playing;
-    this.overlay.prompt.hidden = !playing;
 
     if (playing) return;
 
@@ -370,29 +369,14 @@ export class App {
 const ORBIT_OFFSET = new THREE.Vector3(7, 5, 7);
 
 /**
- * The click-to-play prompt and the crosshair. Both sit over the canvas with
- * pointer events off, so neither can swallow the click that grabs the pointer.
+ * The crosshair, shown only while the pointer is locked. It sits over the
+ * canvas with pointer events off so it cannot swallow the click that grabs the
+ * pointer in the first place.
  */
-function buildOverlay(): { root: HTMLElement; prompt: HTMLElement } {
-  const root = document.createElement("div");
+function buildCrosshair(): HTMLElement {
+  const element = document.createElement("div");
 
-  root.className = "overlay";
+  element.className = "crosshair";
 
-  const crosshair = root.appendChild(document.createElement("div"));
-
-  crosshair.className = "overlay__crosshair";
-
-  const prompt = root.appendChild(document.createElement("div"));
-
-  prompt.className = "overlay__prompt";
-
-  const title = prompt.appendChild(document.createElement("strong"));
-
-  title.textContent = "Click to play";
-
-  const keys = prompt.appendChild(document.createElement("span"));
-
-  keys.textContent = "WASD move · Shift sprint · Ctrl crouch · Space jump · R respawn · Esc release";
-
-  return { root, prompt };
+  return element;
 }
