@@ -13,6 +13,25 @@ const STYLE_OPTIONS = Object.fromEntries(
   Object.entries(RENDER_STYLES).map(([id, style]) => [style.label, id]),
 ) as Record<string, StyleId>;
 
+/**
+ * A renderer that targets WebGPU and nothing else.
+ *
+ * `WebGPURenderer` always installs a WebGL 2 fallback backend, which could only
+ * ever produce broken output for the raw WGSL in `effects/`. Building the
+ * WebGPU backend directly leaves no fallback to reach for, so `init()` rejects
+ * when WebGPU is unavailable and the caller can say so plainly. The two
+ * properties below are all `WebGPURenderer` adds over the base renderer.
+ */
+class WebGPUOnlyRenderer extends THREE.Renderer {
+  override library = new THREE.StandardNodeLibrary();
+
+  readonly isWebGPURenderer = true;
+
+  constructor(parameters: THREE.WebGPURendererParameters) {
+    super(new THREE.WebGPUBackend(parameters), parameters);
+  }
+}
+
 /** A stats-gl panel that rescales itself to the peak value seen so far. */
 function autoScalingPanel(stats: Stats, name: string, fg: string, bg: string) {
   const panel = stats.addPanel(new Stats.Panel(name, fg, bg));
@@ -26,7 +45,7 @@ function autoScalingPanel(stats: Stats, name: string, fg: string, bg: string) {
 }
 
 export class App {
-  private readonly renderer = new THREE.WebGPURenderer({
+  private readonly renderer = new WebGPUOnlyRenderer({
     antialias: true,
     outputBufferType: THREE.HalfFloatType,
     trackTimestamp: true,
@@ -116,7 +135,7 @@ export class App {
     const style = RENDER_STYLES[id];
 
     this.settings.style = id;
-    this.world.applyStyle(style);
+    this.world.setVertexNode(style.vertexNode);
 
     for (const [folderId, folder] of this.styleFolders) folder.hidden = folderId !== id;
 

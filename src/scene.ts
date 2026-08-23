@@ -7,7 +7,6 @@ import * as THREE from "three/webgpu";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 import characterUrl from "../assets/dude.glb?url";
-import type { RenderStyle } from "./styles";
 
 /**
  * Materials accept a TSL `vertexNode`. Materials that come out of a loader are
@@ -46,10 +45,10 @@ export class DemoScene {
 
   private character?: THREE.Object3D;
   private mixer?: THREE.AnimationMixer;
-  private style: RenderStyle | null = null;
+  private vertexNode: THREE.Node | null = null;
 
   constructor() {
-    this.scene.background = new THREE.Color();
+    this.scene.background = new THREE.Color(0xffffff);
 
     this.cube.position.y = 0.5;
     this.ground.rotation.x = -Math.PI / 2;
@@ -77,8 +76,8 @@ export class DemoScene {
       this.mixer.clipAction(gltf.animations[0]).play();
     }
 
-    // Materials that arrived after the current style was applied.
-    if (this.style) this.applyStyle(this.style);
+    // Materials that arrived after the current vertex program was set.
+    this.setVertexNode(this.vertexNode);
   }
 
   update(delta: number): void {
@@ -90,24 +89,20 @@ export class DemoScene {
     this.mixer?.update(delta);
   }
 
-  /** Grafts the style's vertex program onto the meshes and dresses the set. */
-  applyStyle(style: RenderStyle): void {
-    this.style = style;
+  /** Grafts a style's vertex program onto every shadable mesh material. */
+  setVertexNode(node: THREE.Node | null): void {
+    this.vertexNode = node;
 
     for (const object of [this.cube, this.character]) {
       if (!object) continue;
 
       object.traverse((child) => {
         for (const material of materialsOf(child)) {
-          (material as Shadable).vertexNode = style.vertexNode;
+          (material as Shadable).vertexNode = node;
           material.needsUpdate = true;
         }
       });
     }
-
-    (this.scene.background as THREE.Color).setHex(style.background);
-    this.ground.material.color.setHex(style.groundColor);
-    this.grid.visible = style.showGrid;
   }
 
   dispose(): void {
