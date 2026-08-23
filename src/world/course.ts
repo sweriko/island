@@ -29,6 +29,10 @@ const PALETTE = {
   blocked: 0xa8615a,
   pillar: 0x8b8578,
   wall: 0x9d9689,
+  causeway: 0xa8a294,
+  colonnade: 0xb4ae9f,
+  tower: 0x8e897c,
+  band: 0x6f6a5f,
 } as const;
 
 /** Jolt rounds box corners by this much; kept well under the smallest brush. */
@@ -66,7 +70,7 @@ export class Course {
   private readonly dummy = new THREE.Object3D();
   private readonly staticMesh: THREE.Mesh;
 
-  constructor(world: PhysicsWorld, base: number) {
+  constructor(world: PhysicsWorld, base: number, groundAt: (x: number, z: number) => number) {
     this.group.name = "course";
 
     const brushes: Brush[] = [];
@@ -76,6 +80,7 @@ export class Course {
     buildJumpGallery(brushes, base);
     buildCrouchTunnel(brushes, base);
     buildPillars(brushes, base);
+    buildCauseway(brushes, base, groundAt);
 
     this.staticMesh = commitBrushes(world, brushes);
     this.group.add(this.staticMesh);
@@ -341,6 +346,136 @@ function buildCrouchTunnel(out: Brush[], base: number): void {
   out.push(brush(4.6, base + 1.1, 8, 0.6, 2.2, length, PALETTE.wall));
   out.push(brush(8.4, base + 1.1, 8, 0.6, 2.2, length, PALETTE.wall));
   out.push(brush(6.5, base + clearance + 0.25, 8, 4.4, 0.5, length, PALETTE.wall));
+}
+
+/**
+ * The camera's test rig: a straight colonnaded causeway running off the island
+ * to a banded tower.
+ *
+ * Every piece of it exists to make one property of a projection legible.
+ *
+ * - The **deck and lintels** are long straight lines running to a vanishing
+ *   point. They are horizontal, so they are exactly the lines a cylindrical
+ *   lens bows — verticals and the horizon stay straight, everything else
+ *   curves, and this is where you decide whether you can live with that.
+ * - The **columns** are verticals at every distance and every screen position.
+ *   Under a world-axis cylindrical lens they must stay perfectly upright no
+ *   matter where you look; anything else is a bug you can see from across the
+ *   room.
+ * - The **tower's bands** are evenly spaced in the world, so the way they
+ *   compress towards the top reads the vertical map straight off the screen:
+ *   at α = 1 they taper by cos ε, at α = 2 they stay even all the way up.
+ * - The **walk towards the tower** is the honest cost. Its crown climbs past
+ *   the pitch limit long before you reach the base, because a yaw-rigid
+ *   projection cannot show you the zenith. That is not a bug to be tuned out;
+ *   it is the trade, and it should be felt rather than argued about.
+ *
+ * The deck height is measured off the terrain rather than guessed, so the run
+ * stays a single straight line while still clearing whatever the seed grew
+ * underneath it.
+ */
+function buildCauseway(
+  out: Brush[],
+  base: number,
+  groundAt: (x: number, z: number) => number,
+): void {
+  const startZ = -24;
+  const endZ = -128;
+  const halfWidth = 3.5;
+  const spacing = 8;
+  const columnHeight = 6.4;
+  const towerZ = -142;
+  const towerHalf = 8;
+  const towerRise = 108;
+  const bandStep = 6;
+
+  let crest = base;
+
+  for (let z = startZ; z >= towerZ; z -= 2) {
+    for (const x of [-halfWidth, 0, halfWidth]) crest = Math.max(crest, groundAt(x, z));
+  }
+
+  const deck = crest + 2.5;
+  const midZ = (startZ + endZ) / 2;
+  const run = startZ - endZ;
+
+  // A ramp from the plateau up to the deck, so the causeway is walked onto
+  // rather than stepped up to.
+  const rampRise = deck - base;
+  const rampRun = Math.max(rampRise / Math.tan(THREE.MathUtils.degToRad(24)), 4);
+  const rampAngle = Math.atan2(rampRise, rampRun);
+
+  out.push(
+    brush(
+      0,
+      base + rampRise / 2 - 0.3 * Math.cos(rampAngle),
+      startZ + rampRun / 2,
+      halfWidth * 2,
+      0.6,
+      Math.hypot(rampRun, rampRise),
+      PALETTE.causeway,
+      -rampAngle,
+    ),
+  );
+
+  out.push(brush(0, deck - 0.4, midZ, halfWidth * 2, 0.8, run, PALETTE.causeway));
+
+  for (let z = startZ - spacing / 2; z >= endZ; z -= spacing) {
+    const ground = groundAt(0, z);
+    const pierTop = deck - 0.8;
+
+    if (pierTop > ground) {
+      out.push(
+        brush(0, (ground + pierTop) / 2, z, 2.2, pierTop - ground, 2.2, PALETTE.pillar),
+      );
+    }
+
+    for (const side of [-1, 1]) {
+      out.push(
+        brush(
+          side * (halfWidth - 0.6),
+          deck + columnHeight / 2,
+          z,
+          0.7,
+          columnHeight,
+          0.7,
+          PALETTE.colonnade,
+        ),
+      );
+    }
+  }
+
+  for (const side of [-1, 1]) {
+    out.push(
+      brush(
+        side * (halfWidth - 0.6),
+        deck + columnHeight + 0.35,
+        midZ,
+        0.9,
+        0.7,
+        run,
+        PALETTE.colonnade,
+      ),
+    );
+  }
+
+  const footing = groundAt(0, towerZ) - 6;
+
+  out.push(
+    brush(
+      0,
+      (footing + deck + towerRise) / 2,
+      towerZ,
+      towerHalf * 2,
+      deck + towerRise - footing,
+      towerHalf * 2,
+      PALETTE.tower,
+    ),
+  );
+
+  for (let y = deck + bandStep; y < deck + towerRise; y += bandStep) {
+    out.push(brush(0, y, towerZ, towerHalf * 2 + 1.2, 0.5, towerHalf * 2 + 1.2, PALETTE.band));
+  }
 }
 
 /** Vertical occluders: silhouettes for shadow and edge-detection work. */

@@ -5,17 +5,23 @@
 
 import * as THREE from "three/webgpu";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { color, mix, normalWorldGeometry, uniform } from "three/tsl";
+import { uniform } from "three/tsl";
 
 import type { PhysicsWorld } from "../physics/world";
 import characterUrl from "../../assets/dude.glb?url";
 import { Course } from "./course";
+import { ridged2D } from "./noise";
 import { DEFAULT_TERRAIN, Terrain } from "./terrain";
 
 /**
  * `backgroundNode` is a runtime feature of the WebGPU renderer that the shipped
  * `Scene` typings do not describe yet. Narrowing it here beats loosening the
  * scene type everywhere it is touched.
+ *
+ * Nothing sets it any more: the lens paints the sky, out of the same scattering
+ * coefficients it hazes the world with, so there is no gradient to keep in
+ * agreement with the fog. The type stays because the field is still the seam a
+ * future background would go through.
  */
 type NodeScene = THREE.Scene & { backgroundNode: THREE.Node | null };
 
@@ -27,7 +33,6 @@ type NodeScene = THREE.Scene & { backgroundNode: THREE.Node | null };
 type Shadable = THREE.Material & { vertexNode: THREE.Node | null };
 
 const HORIZON = 0x9fb8cc;
-const ZENITH = 0x3d6b9e;
 const SUN_TINT = 0xfff2d6;
 
 /**
@@ -42,6 +47,9 @@ const SHADOW_RADIUS = 46;
 const SHADOW_MAP_SIZE = 2048;
 const SUN_DISTANCE = 140;
 
+/** Octaves for the distant range. Sharp crests, broad valleys, few layers. */
+const RANGE_NOISE = { octaves: 5, lacunarity: 2.1, gain: 0.5 } as const;
+
 export class GameWorld {
   readonly scene = new THREE.Scene() as NodeScene;
   readonly sky = new THREE.HemisphereLight(HORIZON, 0x4a4436, 0.55);
@@ -54,7 +62,8 @@ export class GameWorld {
   /** Radians per second applied to the calibration cube. */
   spin = 0.65;
 
-  private readonly sunDirection = uniform(new THREE.Vector3(0.42, 0.58, 0.7).normalize());
+  /** Shared with the lens: the air must scatter the sun the scene is lit by. */
+  readonly sunDirection = uniform(new THREE.Vector3(0.42, 0.58, 0.7).normalize());
   private readonly lightOrientation = new THREE.Quaternion();
   private readonly inverseLightOrientation = new THREE.Quaternion();
   private readonly shadowFocus = new THREE.Vector3();
@@ -69,10 +78,9 @@ export class GameWorld {
 
     const base = DEFAULT_TERRAIN.plateauHeight;
 
-    this.course = new Course(physics, base);
+    this.course = new Course(physics, base, (x, z) => this.terrain.heightAt(x, z));
     this.spawn = new THREE.Vector3(0, base + 0.4, 16);
 
-    this.buildAtmosphere();
     this.buildSun();
 
     this.cube = new THREE.Mesh(
@@ -84,7 +92,7 @@ export class GameWorld {
     this.cube.receiveShadow = true;
 
     this.scene.add(this.sky, this.sun, this.sun.target, this.terrain.mesh, this.course.group, this.cube);
-    this.scene.add(buildSea(this.terrain.extent));
+    this.scene.add(buildSea(this.terrain.extent), buildDistantRange(DEFAULT_TERRAIN.seed));
   }
 
   /** Loads the animated glTF prop and stands it on the plateau. */
@@ -114,6 +122,11 @@ export class GameWorld {
 
     // Materials that arrived after the current vertex program was set.
     this.setVertexNode(this.vertexNode);
+  }
+
+  /** Arms the one shadow refresh this frame is allowed. */
+  beginFrame(): void {
+    this.sun.shadow.needsUpdate = true;
   }
 
   update(deltaTime: number): void {
@@ -183,33 +196,14 @@ export class GameWorld {
     });
   }
 
-  /**
-   * A procedural sky, evaluated per background fragment.
-   *
-   * `normalWorldGeometry` is the outward direction of the background sphere —
-   * the shading normal would be flipped by the mesh's back-facing material and
-   * hand back an upside-down sky.
-   */
-  private buildAtmosphere(): void {
-    const direction = normalWorldGeometry;
-    const elevation = direction.y.max(0).pow(0.62);
-    const towardsSun = direction.dot(this.sunDirection).max(0);
-
-    this.scene.backgroundNode = mix(color(HORIZON), color(ZENITH), elevation)
-      // Two lobes of the same dot product: a wide forward-scattering haze and
-      // a tight bloom around the sun. Cheapest thing that still reads as air.
-      .add(color(0xffd9a0).mul(towardsSun.pow(8)).mul(0.3))
-      .add(color(SUN_TINT).mul(towardsSun.pow(220)).mul(2.6));
-
-    // Matching the fog to the horizon is what lets distant terrain dissolve
-    // into the sky instead of ending at a visible silhouette.
-    this.scene.fog = new THREE.Fog(HORIZON, 110, 460);
-  }
-
   private buildSun(): void {
     const shadow = this.sun.shadow;
 
     this.sun.castShadow = true;
+    // The lens submits the scene once per tile, and the shadow map is the same
+    // map for all of them. `beginFrame` arms it once so the first tile pays for
+    // it and the rest reuse it.
+    shadow.autoUpdate = false;
     shadow.mapSize.set(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE);
     shadow.camera.left = -SHADOW_RADIUS;
     shadow.camera.right = SHADOW_RADIUS;
@@ -248,6 +242,78 @@ const ORIGIN = new THREE.Vector3();
  * island. Deliberately inert — no collider, no waves, no refraction — and
  * marked as such so it is replaced rather than extended.
  */
+/**
+ * The land beyond the island: a skirt of ridges from 700 m out to 5 km.
+ *
+ * Marked scenery, not level. It carries no collider — rule 5 is about geometry
+ * the player can reach, and nothing here is reachable — and it exists for one
+ * reason, which is to give the atmosphere something to act on. Aerial
+ * perspective is the strongest distance cue the eye has and it has nothing to
+ * say about a 167 m island; hills at four kilometres are what turn extinction
+ * into a sense of scale.
+ *
+ * Ridged noise on a polar grid, seeded from the terrain so the same world seed
+ * reproduces the same horizon.
+ */
+function buildDistantRange(seed: number): THREE.Mesh {
+  const rings = 26;
+  const segments = 192;
+  const inner = 700;
+  const outer = 5200;
+  const positions = new Float32Array(rings * segments * 3);
+  const indices: number[] = [];
+
+  for (let r = 0; r < rings; r++) {
+    // Geometric in radius: the near ridges need the resolution, and the far
+    // ones are a silhouette regardless.
+    const t = r / (rings - 1);
+    const radius = inner * (outer / inner) ** t;
+
+    for (let s = 0; s < segments; s++) {
+      const angle = (s / segments) * Math.PI * 2;
+      const x = Math.cos(angle) * radius;
+      const z = Math.sin(angle) * radius;
+      // Peaks grow with distance so the range reads as receding rather than as
+      // a wall, and the inner edge tapers to nothing to meet the sea.
+      const relief = 260 + 900 * t;
+      const shore = Math.min(1, (radius - inner) / 900);
+      const height =
+        ridged2D(x * 0.00042, z * 0.00042, seed, RANGE_NOISE) * relief * shore;
+      const o = (r * segments + s) * 3;
+
+      positions[o] = x;
+      positions[o + 1] = height - 40;
+      positions[o + 2] = z;
+    }
+  }
+
+  for (let r = 0; r < rings - 1; r++) {
+    for (let s = 0; s < segments; s++) {
+      const a = r * segments + s;
+      const b = r * segments + ((s + 1) % segments);
+
+      indices.push(a, b, a + segments, b, b + segments, a + segments);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+
+  const mesh = new THREE.Mesh(
+    geometry,
+    new THREE.MeshStandardNodeMaterial({ color: 0x5e6552, roughness: 0.95, metalness: 0 }),
+  );
+
+  mesh.name = "distant-range-scenery";
+  mesh.matrixAutoUpdate = false;
+  mesh.updateMatrix();
+
+  return mesh;
+}
+
 function buildSea(extent: number): THREE.Mesh {
   const mesh = new THREE.Mesh(
     new THREE.PlaneGeometry(extent * 4, extent * 4),

@@ -1,5 +1,6 @@
 import * as THREE from "three/webgpu";
 
+import type { Projection } from "../lens/projection";
 import { CharacterBody } from "../physics/character";
 import type { PhysicsWorld } from "../physics/world";
 import type { Input } from "./input";
@@ -15,7 +16,14 @@ import type { Input } from "./input";
  * momentum away and turns air control into ice.
  */
 export interface PlayerTuning {
-  /** Radians of yaw per unit of raw mouse movement. */
+  /**
+   * Radians of yaw per unit of raw mouse movement.
+   *
+   * Yaw needs no lens correction: under every projection here, screen x is
+   * linear in azimuth at the frame centre, so a radian step and a canvas step
+   * are the same step. Pitch is where the lenses disagree, and that conversion
+   * lives in `Projection.stepPitch`.
+   */
   lookSensitivity: number;
   walkSpeed: number;
   sprintSpeed: number;
@@ -43,7 +51,6 @@ export interface PlayerTuning {
   jumpBuffer: number;
   eyeHeight: number;
   crouchEyeHeight: number;
-  fov: number;
 }
 
 const DEFAULT_TUNING: PlayerTuning = {
@@ -63,7 +70,6 @@ const DEFAULT_TUNING: PlayerTuning = {
   jumpBuffer: 0.14,
   eyeHeight: 1.62,
   crouchEyeHeight: 0.92,
-  fov: 72,
 };
 
 const CHARACTER = {
@@ -84,8 +90,6 @@ const VOID_DEPTH = -60;
 
 /** Ceiling on the camera lag used to hide stair steps. */
 const MAX_STEP_SMOOTH = 0.5;
-
-const PITCH_LIMIT = Math.PI / 2 - 0.008;
 
 type GroundState = "ground" | "steep" | "air";
 
@@ -126,6 +130,7 @@ export class Player {
     private readonly world: PhysicsWorld,
     private readonly input: Input,
     private readonly camera: THREE.PerspectiveCamera,
+    private readonly projection: Projection,
     spawn: THREE.Vector3,
   ) {
     this.spawn = spawn.clone();
@@ -162,11 +167,13 @@ export class Player {
     const look = this.input.consumeLook(this.look);
 
     this.yaw -= look.x * lookSensitivity;
-    this.pitch = THREE.MathUtils.clamp(
-      this.pitch - look.y * lookSensitivity,
-      -PITCH_LIMIT,
-      PITCH_LIMIT,
-    );
+    // The lens decides what a unit of pitch *is*. A cylindrical projection
+    // accumulates in its own map coordinate, so the image scrolls at a constant
+    // rate and the angular rate slows towards the pole instead of running away;
+    // a head-attached one just adds radians. Either way the stop comes from the
+    // projection rather than a constant here, so it survives a change of field
+    // of view, aspect ratio, or vertical map.
+    this.pitch = this.projection.stepPitch(this.pitch, -look.y * lookSensitivity);
 
     // Keep yaw in range so it never loses precision over a long session.
     if (this.yaw > Math.PI) this.yaw -= Math.PI * 2;
@@ -262,13 +269,10 @@ export class Player {
     if (!attach) return;
 
     camera.position.copy(this.eye);
+    // No roll, ever: a cylindrical projection has an axis, and rolling the head
+    // would rotate it. Yaw and pitch are the whole of this camera's freedom.
     this.euler.set(this.pitch, this.yaw, 0);
     camera.quaternion.setFromEuler(this.euler);
-
-    if (camera.fov !== tuning.fov) {
-      camera.fov = tuning.fov;
-      camera.updateProjectionMatrix();
-    }
   }
 
   dispose(): void {

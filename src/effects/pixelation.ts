@@ -1,67 +1,41 @@
-import { NearestFilter, PassNode } from "three/webgpu";
-import { cameraFar, cameraNear, mrt, normalView, output, uv } from "three/tsl";
-import type { Camera, Node, Scene, UniformNode } from "three/webgpu";
+import { screenUV } from "three/tsl";
+import type { Node, UniformNode } from "three/webgpu";
 
+import type { LensSource } from "../lens/lens";
 import source from "./pixelation.wgsl?raw";
 import { shader } from "./wgsl";
 
 const pixelationShader = shader<{
   colorTex: Node;
-  depthTex: Node;
-  normalTex: Node;
+  normalDepthTex: Node;
   uv: Node;
-  near: Node;
-  far: Node;
   normalEdgeStrength: Node;
   depthEdgeStrength: Node;
 }>(source);
 
 export interface PixelationOptions {
-  /** Screen pixels per rendered pixel. Drives the render target's size. */
+  /** Canvas pixels per rendered pixel. Drives the lens's resolve resolution. */
   pixelSize: UniformNode<"float", number>;
   normalEdgeStrength: Node;
   depthEdgeStrength: Node;
 }
 
 /**
- * Renders the scene small — with normals and depth alongside colour — then
- * hands all three to `pixelation.wgsl` to draw the edges while upscaling.
+ * Draws PSX-era edges over the lens's own output.
+ *
+ * The scene is never rendered here. The lens has already resolved colour,
+ * world normal and radial distance at whatever resolution this style asked for,
+ * so all that is left is to read them — which is the entire point of putting a
+ * camera behind a seam: an effect written against a linear frustum keeps
+ * working when the frustum stops being one.
  */
-export class PixelationPass extends PassNode {
-  constructor(
-    scene: Scene,
-    camera: Camera,
-    private readonly options: PixelationOptions,
-  ) {
-    super(PassNode.COLOR, scene, camera, {
-      minFilter: NearestFilter,
-      magFilter: NearestFilter,
-    });
-
-    this.setMRT(mrt({ output, normal: normalView }));
-  }
-
-  /**
-   * Called every frame with the drawing buffer size, so reading `pixelSize`
-   * here is what lets the control resize the target live.
-   */
-  override setSize(width: number, height: number): void {
-    this.setResolutionScale(1 / this.options.pixelSize.value);
-    super.setSize(width, height);
-  }
-
-  override setup(): Node {
-    return pixelationShader({
-      colorTex: this.getTextureNode("output"),
-      depthTex: this.getTextureNode("depth"),
-      normalTex: this.getTextureNode("normal"),
-      uv: uv(),
-      // Handed in rather than hard-coded, so the edge thresholds stay correct
-      // when the camera's range changes.
-      near: cameraNear,
-      far: cameraFar,
-      normalEdgeStrength: this.options.normalEdgeStrength,
-      depthEdgeStrength: this.options.depthEdgeStrength,
-    });
-  }
+export function pixelation(lens: LensSource, options: PixelationOptions): Node {
+  return pixelationShader({
+    colorTex: lens.color,
+    normalDepthTex: lens.normalDepth,
+    // Top-left normalised coordinates, matching `textureLoad`'s own origin.
+    uv: screenUV,
+    normalEdgeStrength: options.normalEdgeStrength,
+    depthEdgeStrength: options.depthEdgeStrength,
+  });
 }

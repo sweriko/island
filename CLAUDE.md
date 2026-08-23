@@ -70,11 +70,39 @@ src/
   app.ts               orchestrator: renderer, render pipeline, frame loop, UI
   styles.ts            render styles (vertex programs + post chains) selectable at runtime
   effects/             raw WGSL + the TSL nodes that feed it
+  lens/                the camera as a function: projection family, tile fit, resample
   physics/             Jolt ownership: module load, layers, fixed-step world, character
   player/              input capture and the first-person controller/camera rig
   world/               the level: procedural terrain, static brushes, dynamic props
 ```
 
+- `lens/` is the camera. `projection.ts` is the map from canvas pixels to world
+  directions — rectilinear, an isotropic radial family, and a world-axis
+  cylindrical family whose vertical map is `F(ε) = ∫secᵅ`. Pitch is an *exact*
+  image translation at every setting — verified at 3e-13 px against a
+  rectilinear frame's 2441 px — which is the whole reason it exists. Two dials
+  buy back straightness with yaw rigidity, and only yaw's: `straighten` bends
+  the azimuth map from linear towards tangent, which unbows lines running away
+  from the viewer, and `upright` moves the vertical map from absolute elevation
+  towards the vertical-plane one, which is the only thing that unbows a level
+  line running *across* the view. The readout prices both live, in pixels of
+  departure from a rigid slide per 10 degrees turned.
+- `lens/tiles.ts` is a stub behind a clean seam, and marked as one. A fixed-
+  function rasterizer cannot be handed a nonlinear camera, so the frame is cut
+  into a grid, each cell gets a per-frame fitted frustum, and a resample pass
+  puts them back through the real lens. A ray or micro-polygon pipeline pays
+  none of that; the fitting maths is what transfers, since the Jacobian it
+  computes is the pixel-density term a cluster LOD metric needs.
+- A render style never sees the scene. It consumes the lens's resolved colour
+  and its world-normal/radial-distance buffer, which is what lets the camera
+  stop being linear without every effect having to be rewritten.
+- `lens.anchor(weld)` is what the rigidity is *for*. Because the cylindrical map
+  is shift-invariant there is one metric image plane wrapped around the eye, and
+  a mark indexed by a fragment's address on it is welded to the world while
+  keeping a constant size in pixels — the third option between screen-space
+  marks that swim and world-space marks that swell. Measured: at 720.9 px/rad,
+  turning 0.08 rad slides the ruling 58 px against a predicted 57.7, and 0 px
+  with the anchor wound off. The "Engraved plate" style is the demonstration.
 - `physics/world.ts` owns the fixed-step accumulator and hands back an interpolation alpha.
 - `player/player.ts` splits per-frame work (look, at render rate, zero added latency) from
   per-tick work (locomotion, at simulation rate).
@@ -94,6 +122,10 @@ src/
 - `npx tsc --noEmit` must be clean. `strict`, `noUnusedLocals`, and
   `exactOptionalPropertyTypes` are on deliberately — do not loosen `tsconfig.json` to make
   an error go away.
+- **A WGSL entry point's parameter list must carry no `//` comments.** three
+  re-emits it as `fn name ( <params> )` on one line, so a comment on the last
+  parameter eats the closing bracket and the compiler then blames the first line
+  of the body. Document parameters above the function.
 - Comments explain **why**, especially the non-obvious physical or numerical reasoning.
   Do not narrate what the code already says.
 - Prefer deleting a mediocre system over extending it.

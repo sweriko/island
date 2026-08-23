@@ -4,11 +4,13 @@ import Stats from "stats-gl";
 import { Pane } from "tweakpane";
 import type { FolderApi } from "tweakpane";
 
+import { Lens } from "./lens/lens";
+import type { LensMode } from "./lens/projection";
 import { loadJolt } from "./physics/jolt";
 import { PhysicsWorld } from "./physics/world";
 import { Input } from "./player/input";
 import { Player } from "./player/player";
-import { RENDER_STYLES, type StyleId, type StyleOutput } from "./styles";
+import { RENDER_STYLES, type StyleId } from "./styles";
 import { GameWorld } from "./world/world";
 
 const MAX_PIXEL_RATIO = 2;
@@ -19,6 +21,12 @@ const MAX_FRAME_DELTA = 0.25;
 const STYLE_OPTIONS = Object.fromEntries(
   Object.entries(RENDER_STYLES).map(([id, style]) => [style.label, id]),
 ) as Record<string, StyleId>;
+
+const LENS_OPTIONS: Record<string, LensMode> = {
+  "Cylindrical (world axis)": "cylindrical",
+  "Rectilinear (baseline)": "rectilinear",
+  "Isotropic (head axis)": "isotropic",
+};
 
 type CameraMode = "play" | "orbit";
 
@@ -60,9 +68,16 @@ export class App {
     trackTimestamp: true,
   });
 
-  // Far enough to see the far shore, near enough that a weapon model will fit
-  // in front of the eye later without a separate depth range.
-  private readonly camera = new THREE.PerspectiveCamera(72, 1, 0.1, 900);
+  /**
+   * The scene camera is a position and an orientation, nothing more. Field of
+   * view belongs to the lens now — this camera's own projection matrix is never
+   * used to draw anything, only its near and far range, which the tiles share.
+   */
+  // Far enough for the range at five kilometres. Near is as far out as the
+  // character's own radius allows, because the depth buffer's precision is
+  // spent almost entirely on the first metre otherwise.
+  private readonly camera = new THREE.PerspectiveCamera(72, 1, 0.25, 8000);
+  private readonly lens = new Lens();
   private readonly pipeline = new THREE.RenderPipeline(this.renderer);
   private readonly timer = new THREE.Timer();
   private readonly controls: OrbitControls;
@@ -76,22 +91,42 @@ export class App {
   private readonly reportDrawCalls: (value: number) => void;
 
   private readonly resizeObserver = new ResizeObserver(() => this.resize());
-  /** Post-processing chains are built the first time their style is picked. */
-  private readonly outputs = new Map<StyleId, StyleOutput>();
 
   // Built by `init()`; the frame loop only starts once all three exist.
   private physics: PhysicsWorld | null = null;
   private world: GameWorld | null = null;
   private player: Player | null = null;
 
-  private activeOutput: StyleOutput | null = null;
   private hasTimestamps = false;
 
   private readonly settings = {
     style: "basic" as StyleId,
     camera: "play" as CameraMode,
     pixelRatio: Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO),
+    atlas: 3072,
   };
+
+  /**
+   * What the lens is actually doing, in numbers.
+   *
+   * Two of these decide whether the camera is honest. `Sampling` is the worst
+   * ratio of tile density to canvas density anywhere on screen: below 1.00 the
+   * atlas could not hold the fit and part of the frame is being magnified, so
+   * the picture is softer than the projection says it should be. `Tile cost` is
+   * the price of faking a nonlinear camera on a rasterizer, and is exactly the
+   * number that goes to zero in a ray-traced or micro-polygon pipeline.
+   */
+  private readonly readout = {
+    trueFov: "—",
+    pitch: "—",
+    centreZoom: "—",
+    yawSwim: "—",
+    tiles: "—",
+    cost: "—",
+    sampling: "—",
+  };
+
+  private readonly extent = new THREE.Vector2();
 
   constructor(private readonly container: HTMLElement) {
     this.renderer.domElement.className = "app__canvas";
@@ -140,7 +175,16 @@ export class App {
     await this.world.load();
     this.physics.optimize();
 
-    this.player = new Player(this.physics, this.input, this.camera, this.world.spawn);
+    this.player = new Player(
+      this.physics,
+      this.input,
+      this.camera,
+      this.lens.projection,
+      this.world.spawn,
+    );
+
+    this.lens.setAtlasSize(this.settings.atlas);
+    this.lens.setSun(this.world.sunDirection.value);
 
     this.buildPane();
     this.setStyle(this.settings.style);
@@ -163,7 +207,7 @@ export class App {
     this.pane.dispose();
     this.stats.dispose();
 
-    for (const output of this.outputs.values()) output.dispose();
+    this.lens.dispose();
     this.pipeline.dispose();
 
     this.player?.dispose();
@@ -181,28 +225,20 @@ export class App {
 
     this.settings.style = id;
     this.world?.setVertexNode(style.vertexNode);
+    this.lens.requestNormals(style.needsNormalDepth);
+    this.lens.setResolutionScale(style.resolutionScale());
 
     for (const [folderId, folder] of this.styleFolders) folder.hidden = folderId !== id;
 
-    let output = this.outputs.get(id) ?? null;
-
-    if (!output && style.createOutput && this.world) {
-      output = style.createOutput(this.world.scene, this.camera);
-      this.outputs.set(id, output);
-    }
-
-    this.activeOutput = output;
-
-    if (output) {
-      this.pipeline.outputNode = output.node;
-      this.pipeline.needsUpdate = true;
-    }
+    this.pipeline.outputNode = style.createOutput(this.lens.source);
+    this.pipeline.needsUpdate = true;
   }
 
   /**
    * Orbit is an inspection mode, not a second way to play: it exists so the
    * scene can be looked at from outside the player's head while the simulation
-   * keeps running underneath.
+   * keeps running underneath. It goes through the same lens, because a camera
+   * that only some cameras can use is not a camera.
    */
   private setCameraMode(mode: CameraMode): void {
     const playing = mode === "play";
@@ -218,8 +254,6 @@ export class App {
     if (this.player) {
       this.controls.target.copy(this.player.eye);
       this.camera.position.copy(this.player.eye).add(ORBIT_OFFSET);
-      this.camera.fov = 55;
-      this.camera.updateProjectionMatrix();
       this.controls.update();
     }
   }
@@ -256,6 +290,8 @@ export class App {
       this.styleFolders.set(id, folder);
     }
 
+    this.buildLensPane();
+
     const movement = this.pane.addFolder({ title: "Player", expanded: false });
 
     movement.addBinding(player.tuning, "lookSensitivity", {
@@ -279,7 +315,6 @@ export class App {
     });
     movement.addBinding(player.tuning, "airAccel", { label: "Air accel", min: 0, max: 40, step: 1 });
     movement.addBinding(player.tuning, "friction", { label: "Friction", min: 0, max: 20, step: 0.5 });
-    movement.addBinding(player.tuning, "fov", { label: "FOV", min: 50, max: 110, step: 1 });
     movement.addButton({ title: "Respawn" }).on("click", () => player.respawn());
 
     const simulation = this.pane.addFolder({ title: "Physics", expanded: false });
@@ -290,7 +325,7 @@ export class App {
     });
     simulation.addBinding(physics, "gravity", { label: "Gravity", min: 5, max: 40, step: 0.5 });
 
-    const scene = this.pane.addFolder({ title: "Scene" });
+    const scene = this.pane.addFolder({ title: "Scene", expanded: false });
 
     scene.addBinding(this.renderer, "toneMappingExposure", {
       label: "Exposure",
@@ -311,6 +346,91 @@ export class App {
       .on("change", () => this.resize());
   }
 
+  private buildLensPane(): void {
+    const lens = this.lens;
+    const reconfigure = (): void => lens.configure();
+
+    const folder = this.pane.addFolder({ title: "Lens" });
+
+    folder
+      .addBinding(lens.settings, "mode", { label: "Projection", options: LENS_OPTIONS })
+      .on("change", reconfigure);
+    folder
+      .addBinding(lens.settings, "hfov", { label: "Horizontal FOV", min: 50, max: 170, step: 1 })
+      .on("change", reconfigure);
+    folder
+      .addBinding(lens.settings, "alpha", {
+        label: "Vertical map α",
+        min: 0,
+        max: 2,
+        step: 0.05,
+      })
+      .on("change", reconfigure);
+    folder
+      .addBinding(lens.settings, "straighten", {
+        label: "Straighten",
+        min: 0,
+        max: 1,
+        step: 0.01,
+      })
+      .on("change", reconfigure);
+    folder
+      .addBinding(lens.settings, "upright", { label: "Level lines", min: 0, max: 1, step: 0.01 })
+      .on("change", reconfigure);
+    folder
+      .addBinding(lens.settings, "isoS", { label: "Isotropic s", min: 0.2, max: 1, step: 0.01 })
+      .on("change", reconfigure);
+    folder
+      .addBinding(lens.settings, "maxEdgeZoom", {
+        label: "Edge zoom cap",
+        min: 1.5,
+        max: 12,
+        step: 0.25,
+      })
+      .on("change", reconfigure);
+
+    const air = this.pane.addFolder({ title: "Air" });
+
+    air.addBinding(lens.air, "scaleHeight", { label: "Scale height", min: 200, max: 5000, step: 50 });
+    air.addBinding(lens.air, "rayleigh", {
+      label: "Molecular",
+      min: 0,
+      max: 0.001,
+      step: 0.00001,
+    });
+    air.addBinding(lens.air, "mie", { label: "Aerosol", min: 0, max: 0.001, step: 0.00001 });
+    air.addBinding(lens.air, "mieG", { label: "Forwardness", min: 0, max: 0.95, step: 0.01 });
+    air.addBinding(lens, "sunIntensity", { label: "Sun", min: 0, max: 60, step: 0.5 });
+
+    const raster = this.pane.addFolder({ title: "Raster (stub)", expanded: false });
+
+    raster.addBinding(lens.plan, "columns", { label: "Tile columns", min: 1, max: 6, step: 1 });
+    raster.addBinding(lens.plan, "rows", { label: "Tile rows", min: 1, max: 4, step: 1 });
+    raster.addBinding(lens.plan, "supersample", {
+      label: "Supersample",
+      min: 1,
+      max: 2,
+      step: 0.05,
+    });
+    raster
+      .addBinding(this.settings, "atlas", {
+        label: "Atlas",
+        options: { "2048²": 2048, "3072²": 3072, "4096²": 4096 },
+      })
+      .on("change", ({ value }) => lens.setAtlasSize(value));
+    raster.addBinding(lens, "debugSeams", { label: "Tint tiles" });
+
+    const readouts = this.pane.addFolder({ title: "Readout" });
+
+    readouts.addBinding(this.readout, "trueFov", { label: "True FOV", readonly: true });
+    readouts.addBinding(this.readout, "pitch", { label: "Pitch", readonly: true });
+    readouts.addBinding(this.readout, "centreZoom", { label: "Centre zoom", readonly: true });
+    readouts.addBinding(this.readout, "yawSwim", { label: "Yaw swim", readonly: true });
+    readouts.addBinding(this.readout, "tiles", { label: "Tiles", readonly: true });
+    readouts.addBinding(this.readout, "cost", { label: "Tile cost", readonly: true });
+    readouts.addBinding(this.readout, "sampling", { label: "Sampling", readonly: true });
+  }
+
   private readonly resize = (): void => {
     const width = this.container.clientWidth || window.innerWidth;
     const height = this.container.clientHeight || window.innerHeight;
@@ -320,7 +440,34 @@ export class App {
 
     this.renderer.setPixelRatio(this.settings.pixelRatio);
     this.renderer.setSize(width, height);
+
+    // The lens works in drawing-buffer pixels, which is what the resolve pass
+    // and the tile fit are both measured in.
+    const buffer = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+
+    this.lens.resize(buffer.x, buffer.y);
   };
+
+  private updateReadout(): void {
+    const { projection, plan } = this.lens;
+    const stats = plan.stats;
+
+    projection.frameExtent(this.extent);
+
+    this.readout.trueFov = `${this.extent.x.toFixed(0)}° × ${this.extent.y.toFixed(0)}°`;
+    this.readout.pitch = `${THREE.MathUtils.radToDeg(projection.pitch).toFixed(1)}° / ${THREE.MathUtils.radToDeg(projection.pitchLimit).toFixed(0)}°`;
+    this.readout.centreZoom = `${projection.centreZoom().toFixed(2)}×`;
+
+    const swim = projection.yawSwim();
+
+    this.readout.yawSwim = Number.isNaN(swim) ? "—" : `${swim.toFixed(1)} px / 10°`;
+    this.readout.tiles = `${stats.columns}×${stats.rows}, ${THREE.MathUtils.radToDeg(stats.halfAngle).toFixed(0)}° half`;
+    this.readout.cost = `${(stats.pixels / 1e6).toFixed(2)} Mpx, ${stats.overhead.toFixed(2)}×`;
+    this.readout.sampling =
+      stats.sampleRatio >= 0.999
+        ? `${stats.sampleRatio.toFixed(2)}× ok`
+        : `${stats.sampleRatio.toFixed(2)}× SHORT`;
+  }
 
   private readonly animate = (timestamp?: number): void => {
     const { physics, world, player } = this;
@@ -349,9 +496,12 @@ export class App {
     if (!firstPerson) this.controls.update();
 
     world.focusShadows(firstPerson ? player.eye : this.controls.target);
+    world.beginFrame();
 
-    if (this.activeOutput) this.pipeline.render();
-    else this.renderer.render(world.scene, this.camera);
+    this.lens.setResolutionScale(RENDER_STYLES[this.settings.style].resolutionScale());
+    this.lens.update(this.camera);
+    this.lens.render(this.renderer, world.scene);
+    this.pipeline.render();
 
     // stats-gl reads `info.render.timestamp`, which only lands once resolved.
     if (this.hasTimestamps) void this.renderer.resolveTimestampsAsync();
@@ -361,6 +511,7 @@ export class App {
     this.reportTriangles(triangles);
     this.reportDrawCalls(drawCalls);
     this.stats.update();
+    this.updateReadout();
 
     this.input.endFrame();
   };

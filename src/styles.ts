@@ -1,21 +1,29 @@
 /**
- * The render styles this boilerplate ships with.
+ * The render styles this playground ships with.
  *
  * A style owns everything that changes when you pick it: the uniforms it
  * exposes to the UI, an optional vertex program grafted onto scene materials,
- * and an optional post-processing chain.
+ * and the node it builds to turn the lens's output into pixels.
+ *
+ * Note what a style is *not* handed: the scene. The lens has already resolved
+ * colour, world normal and radial distance through whatever projection is
+ * active, so a style never learns whether the camera it is decorating was
+ * linear. That seam is the whole reason a nonlinear camera can be dropped into
+ * an existing effect stack without rewriting the stack.
  *
  * All shader code lives in `effects/*.wgsl`; the nodes below only decide which
  * inputs each shader is handed.
  */
 
 import { uniform } from "three/tsl";
-import type { Camera, Node, Scene, UniformNode } from "three/webgpu";
+import type { Node, UniformNode } from "three/webgpu";
 
-import { PixelationPass } from "./effects/pixelation";
+import { painterly } from "./effects/painterly";
+import { pixelation } from "./effects/pixelation";
 import { psxJitter } from "./effects/psxJitter";
+import type { LensSource } from "./lens/lens";
 
-export type StyleId = "basic" | "psx";
+export type StyleId = "basic" | "psx" | "painterly";
 
 /** A uniform surfaced as a slider. */
 export interface Control {
@@ -26,20 +34,26 @@ export interface Control {
   step: number;
 }
 
-/** A live post-processing chain, owned by whoever built it. */
-export interface StyleOutput {
-  node: Node;
-  dispose(): void;
-}
-
 export interface RenderStyle {
   label: string;
   controls: Control[];
   /** Grafted onto every shadable scene material while the style is active. */
   vertexNode: Node | null;
-  /** `null` renders the scene straight to the canvas, with no extra targets. */
-  createOutput: ((scene: Scene, camera: Camera) => StyleOutput) | null;
+  /** True if the style reads the lens's normal and distance buffer. */
+  needsNormalDepth: boolean;
+  /** Fraction of the canvas the lens should resolve at, read every frame. */
+  resolutionScale: () => number;
+  /** Builds the node the pipeline presents, out of the lens's buffers. */
+  createOutput: (lens: LensSource) => Node;
 }
+
+const plate = {
+  weld: uniform(1),
+  spacing: uniform(9),
+  strength: uniform(0.7),
+  levels: uniform(4),
+  grain: uniform(0.1),
+};
 
 const psx = {
   pixelSize: uniform(3),
@@ -54,7 +68,24 @@ export const RENDER_STYLES: Record<StyleId, RenderStyle> = {
     label: "Basic",
     controls: [],
     vertexNode: null,
-    createOutput: null,
+    needsNormalDepth: false,
+    resolutionScale: () => 1,
+    createOutput: (lens) => lens.present,
+  },
+
+  painterly: {
+    label: "Engraved plate",
+    controls: [
+      { label: "Weld to world", uniform: plate.weld, min: 0, max: 1, step: 0.01 },
+      { label: "Ruling pitch", uniform: plate.spacing, min: 3, max: 20, step: 0.5 },
+      { label: "Ink", uniform: plate.strength, min: 0, max: 1, step: 0.02 },
+      { label: "Tone steps", uniform: plate.levels, min: 2, max: 12, step: 1 },
+      { label: "Paper grain", uniform: plate.grain, min: 0, max: 0.5, step: 0.01 },
+    ],
+    vertexNode: null,
+    needsNormalDepth: false,
+    resolutionScale: () => 1,
+    createOutput: (lens) => painterly(lens, plate),
   },
 
   psx: {
@@ -67,10 +98,8 @@ export const RENDER_STYLES: Record<StyleId, RenderStyle> = {
       { label: "Vertex snap", uniform: psx.snapPixels, min: 1, max: 24, step: 1 },
     ],
     vertexNode: psxJitter(psx),
-    createOutput: (scene, camera) => {
-      const node = new PixelationPass(scene, camera, psx);
-
-      return { node, dispose: () => node.dispose() };
-    },
+    needsNormalDepth: true,
+    resolutionScale: () => 1 / psx.pixelSize.value,
+    createOutput: (lens) => pixelation(lens, psx),
   },
 };

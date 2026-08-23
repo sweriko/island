@@ -1,4 +1,4 @@
-import { cameraProjectionMatrix, cameraViewMatrix, positionWorld, screenSize } from "three/tsl";
+import { cameraProjectionMatrix, cameraViewMatrix, positionWorld, viewportSize } from "three/tsl";
 import type { Node } from "three/webgpu";
 
 import source from "./psxJitter.wgsl?raw";
@@ -8,7 +8,7 @@ const psxJitterShader = shader<{
   projection: Node;
   view: Node;
   worldPosition: Node;
-  screenSize: Node;
+  viewportSize: Node;
   snapPixels: Node;
   strength: Node;
 }>(source);
@@ -26,7 +26,7 @@ export function psxJitter(options: PsxJitterOptions): Node {
     projection: cameraProjectionMatrix,
     view: cameraViewMatrix,
     worldPosition: positionWorld,
-    screenSize,
+    viewportSize,
     ...options,
   });
 }
