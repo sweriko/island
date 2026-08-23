@@ -1,10 +1,11 @@
 :root {
+  --inset: 16px;
+
   color-scheme: light;
-  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+  font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
   font-synthesis: none;
   line-height: 1.4;
   text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -20,13 +21,13 @@ body,
   margin: 0;
 }
 
-#app {
-  position: relative;
-}
-
 body {
   overflow: hidden;
-  background: #ffffff;
+  background: #fff;
+}
+
+#app {
+  position: relative;
 }
 
 .app__canvas {
@@ -39,75 +40,62 @@ body {
 
 .ui-pane {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: var(--inset);
+  right: var(--inset);
   z-index: 1;
-  max-height: calc(100% - 32px);
+  max-height: calc(100% - var(--inset) * 2);
   overflow: auto;
-  pointer-events: auto;
 }
 
 .ui-pane .tp-dfwv {
-  width: min(320px, calc(100vw - 32px));
-  max-height: calc(100vh - 32px);
+  width: min(320px, calc(100vw - var(--inset) * 2));
 }
 
+/* stats-gl pins its container with inline `position: fixed; top: 0; left: 0`,
+   so insetting it from the corner takes !important. */
 .ui-stats {
   position: absolute !important;
-  left: 16px;
-  bottom: 16px;
+  top: var(--inset) !important;
+  left: var(--inset) !important;
   z-index: 1;
-  opacity: 0.96;
 }
 
 .error-card {
   position: fixed;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
+  left: var(--inset);
+  right: var(--inset);
+  bottom: var(--inset);
   max-width: 420px;
   padding: 16px 18px;
   color: #edf4ff;
-  border: 1px solid rgba(160, 194, 255, 0.16);
+  border: 1px solid rgb(160 194 255 / 16%);
   border-radius: 18px;
-  background: rgba(11, 17, 27, 0.92);
+  background: rgb(11 17 27 / 92%);
 }
 
 .error-card__title {
-  display: block;
+  margin: 0;
   font-size: 1rem;
   font-weight: 700;
 }
 
-.error-card__meta {
+.error-card__message {
   margin: 8px 0 0;
-  color: rgba(237, 244, 255, 0.72);
+  color: rgb(237 244 255 / 72%);
   font-size: 0.9rem;
 }
 
-@media (max-width: 720px) {
-  .ui-pane {
-    top: 12px;
-    right: 12px;
-    max-height: calc(100% - 24px);
-  }
-
-  .ui-pane .tp-dfwv {
-    width: min(300px, calc(100vw - 24px));
-    max-height: calc(100vh - 24px);
-  }
-
-  .ui-stats {
-    left: 12px;
-    bottom: 12px;
-    transform: scale(0.92);
-    transform-origin: left bottom;
+@media (width <= 720px) {
+  :root {
+    --inset: 12px;
   }
 
   .error-card {
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
     max-width: none;
+  }
+
+  .ui-stats {
+    transform: scale(0.92);
+    transform-origin: left top;
   }
 }

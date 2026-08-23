@@ -9,13 +9,13 @@
   },
   "devDependencies": {
     "@tweakpane/core": "^2.0.5",
-    "@types/three": "^0.184.0",
-    "typescript": "6.0.3",
-    "vite": "8.0.10"
+    "@types/three": "^0.185.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
   },
   "dependencies": {
-    "stats-gl": "^4.1.0",
-    "three": "^0.184.0",
+    "stats-gl": "^4.2.3",
+    "three": "^0.185.1",
     "tweakpane": "^4.0.5"
   }
 }

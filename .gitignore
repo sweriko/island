@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 *.blend1
+
+# Scratch clones / reference material
+.tmp/
