@@ -1,5 +1,5 @@
 import { NearestFilter, PassNode } from "three/webgpu";
-import { mrt, normalView, output, uv } from "three/tsl";
+import { cameraFar, cameraNear, mrt, normalView, output, uv } from "three/tsl";
 import type { Camera, Node, Scene, UniformNode } from "three/webgpu";
 
 import source from "./pixelation.wgsl?raw";
@@ -10,6 +10,8 @@ const pixelationShader = shader<{
   depthTex: Node;
   normalTex: Node;
   uv: Node;
+  near: Node;
+  far: Node;
   normalEdgeStrength: Node;
   depthEdgeStrength: Node;
 }>(source);
@@ -54,6 +56,10 @@ export class PixelationPass extends PassNode {
       depthTex: this.getTextureNode("depth"),
       normalTex: this.getTextureNode("normal"),
       uv: uv(),
+      // Handed in rather than hard-coded, so the edge thresholds stay correct
+      // when the camera's range changes.
+      near: cameraNear,
+      far: cameraFar,
       normalEdgeStrength: this.options.normalEdgeStrength,
       depthEdgeStrength: this.options.depthEdgeStrength,
     });

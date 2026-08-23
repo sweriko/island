@@ -1,7 +1,11 @@
 :root {
   --inset: 16px;
+  --ink: rgb(233 242 255 / 88%);
+  --ink-dim: rgb(233 242 255 / 52%);
+  --panel: rgb(8 13 21 / 62%);
+  --edge: rgb(160 194 255 / 14%);
 
-  color-scheme: light;
+  color-scheme: dark;
   font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
   font-synthesis: none;
   line-height: 1.4;
@@ -23,7 +27,7 @@ body,
 
 body {
   overflow: hidden;
-  background: #fff;
+  background: #0b1119;
 }
 
 #app {
@@ -36,13 +40,99 @@ body {
   height: 100%;
   outline: none;
   touch-action: none;
+  cursor: crosshair;
+}
+
+/* The overlay sits over the canvas and must never eat a click meant for the
+   pointer lock, so nothing inside it is interactive. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Two hairlines crossing at the aim point: readable against sky and against
+   dark terrain without a drop shadow blurring it. */
+.overlay__crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  translate: -50% -50%;
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+
+.overlay__crosshair::before,
+.overlay__crosshair::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgb(255 255 255 / 78%);
+  outline: 1px solid rgb(0 0 0 / 35%);
+  translate: -50% -50%;
+}
+
+.overlay__crosshair::before {
+  width: 18px;
+  height: 1px;
+}
+
+.overlay__crosshair::after {
+  width: 1px;
+  height: 18px;
+}
+
+.overlay--playing .overlay__crosshair {
+  opacity: 1;
+}
+
+.overlay__prompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: min(440px, calc(100vw - var(--inset) * 2));
+  padding: 14px 20px;
+  translate: -50% -50%;
+  border: 1px solid var(--edge);
+  border-radius: 16px;
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  text-align: center;
+  transition: opacity 120ms ease-out;
+}
+
+.overlay__prompt strong {
+  font-size: 1rem;
+}
+
+.overlay__prompt span {
+  color: var(--ink-dim);
+  font-size: 0.78rem;
+}
+
+.overlay--playing .overlay__prompt {
+  opacity: 0;
+}
+
+/* `display: flex` above outranks the user agent's `[hidden] { display: none }`,
+   so hiding the prompt has to be restated at this specificity. */
+.overlay__prompt[hidden] {
+  display: none;
 }
 
 .ui-pane {
   position: absolute;
   top: var(--inset);
   right: var(--inset);
-  z-index: 1;
+  z-index: 2;
   max-height: calc(100% - var(--inset) * 2);
   overflow: auto;
 }
@@ -57,7 +147,7 @@ body {
   position: absolute !important;
   top: var(--inset) !important;
   left: var(--inset) !important;
-  z-index: 1;
+  z-index: 2;
 }
 
 .error-card {
@@ -68,7 +158,7 @@ body {
   max-width: 420px;
   padding: 16px 18px;
   color: #edf4ff;
-  border: 1px solid rgb(160 194 255 / 16%);
+  border: 1px solid var(--edge);
   border-radius: 18px;
   background: rgb(11 17 27 / 92%);
 }
